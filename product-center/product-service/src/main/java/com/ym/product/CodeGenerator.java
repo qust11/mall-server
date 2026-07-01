@@ -4,11 +4,9 @@ package com.ym.product;
 import com.baomidou.mybatisplus.core.exceptions.MybatisPlusException;
 import com.baomidou.mybatisplus.generator.FastAutoGenerator;
 import com.baomidou.mybatisplus.generator.config.OutputFile;
-import com.baomidou.mybatisplus.generator.config.rules.DbColumnType;
 import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
 import org.apache.commons.lang3.StringUtils;
 
-import java.sql.Types;
 import java.util.Collections;
 import java.util.Scanner;
 

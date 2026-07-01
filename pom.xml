@@ -21,6 +21,8 @@
         <module>pay-center</module>
         <module>product-center</module>
         <module>mall-common</module>
+        <module>cart-center</module>
+        <module>cart-center</module>
     </modules>
 
     <properties>

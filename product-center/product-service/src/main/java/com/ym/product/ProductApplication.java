@@ -19,7 +19,6 @@ import org.springframework.context.annotation.ComponentScans;
 @EnableDiscoveryClient
 @MapperScan("com.ym.product.mapper")
 @ComponentScans( value = {@ComponentScan("com.ym.product"), @ComponentScan("com.ym.common")})
-
 public class ProductApplication {
     public static void main(String[] args) {
         SpringApplication.run(ProductApplication.class, args);

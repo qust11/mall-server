@@ -1,6 +1,7 @@
 package com.ym.gateway.config;
 
 
+import com.ym.common.constant.AuthConstant;
 import com.ym.common.result.Result;
 import com.ym.common.util.JwtUtil;
 import com.ym.common.util.RedisUtil;
@@ -97,7 +98,7 @@ public class GatewayAuthFilterConfig {
 //                }
                 // 透传用户ID到下游微服务
                 ServerHttpRequest newReq = request.mutate()
-                        .header("X-User-Id", userId.toString())
+                        .header(AuthConstant.AUTH_USER_ID_HEADER, userId.toString())
                         .build();
                 return chain.filter(exchange.mutate().request(newReq).build());
             } catch (RuntimeException e) {

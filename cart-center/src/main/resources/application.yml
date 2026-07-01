@@ -1,0 +1,22 @@
+server:
+  port: 8096
+spring:
+  application:
+    name: cart-service
+  config:
+    import:
+      - nacos:mall-cart?group=DEFAULT_GROUP
+  cloud:
+    nacos:
+      server-addr: 127.0.0.1:8848
+      config:
+        namespace: 5cfb9e33-bd54-4203-989b-a09c9e604a25
+        access-key: VGhpc0lzTXlDdXN0b21TZWNyZXRLZXkwMTIzNDU2Nzg=
+        password: nacos
+        enabled: true
+        username: nacos
+        file-extension: YAML
+        enable-remote-sync-config: true
+      discovery:
+        access-key: VGhpc0lzTXlDdXN0b21TZWNyZXRLZXkwMTIzNDU2Nzg=
+        namespace: 5cfb9e33-bd54-4203-989b-a09c9e604a25

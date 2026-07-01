@@ -47,11 +47,15 @@ spring:
             - id: orderRoute
               uri: lb://order-service
               predicates:
-                - Path=/order/**
+                - Path=/order-service/**
             - id: payRoute
               uri: lb://pay-service
               predicates:
-                - Path=/pay/**
+                - Path=/pay-service/**
+            - id: cartRoute
+              uri: lb://cart-service
+              predicates:
+                - Path=/cart-service/**
           globalcors:
             # 放行OPTIONS预检请求，核心配置
             add-to-simple-url-handler-mapping: true
