@@ -5,6 +5,7 @@ import com.ym.common.constant.AuthConstant;
 import com.ym.common.result.Result;
 import com.ym.common.util.JwtUtil;
 import com.ym.common.util.RedisUtil;
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.CacheControl;
 import org.springframework.http.HttpHeaders;
@@ -111,6 +112,9 @@ public class GatewayAuthFilterConfig {
      * 判断是否黑名单接口
      */
     private boolean isBlackApi(String path) {
+        if (CollectionUtils.isEmpty(gatewayProperties.getBlackListApis())) {
+            return false;
+        }
         for (String black : gatewayProperties.getBlackListApis()) {
             if (path.startsWith(black)) {
                 return true;
@@ -123,6 +127,9 @@ public class GatewayAuthFilterConfig {
      * 判断是否白名单接口
      */
     private boolean isWhiteApi(String path) {
+        if (CollectionUtils.isEmpty(gatewayProperties.getWhiteListApis())) {
+            return false;
+        }
         for (String white : gatewayProperties.getWhiteListApis()) {
             if (path.startsWith(white)) {
                 return true;

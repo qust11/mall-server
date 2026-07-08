@@ -22,8 +22,8 @@ public class MallGatewayProperties {
     @Data
     public static class Limit {
         // 单ip最大次数
-        private Integer ipMax;
+        private Integer ipMax = 1000;
         // 过期秒数
-        private Integer expireSecond;
+        private Integer expireSecond = 600;
     }
 }

@@ -46,5 +46,5 @@ public class GoodsSpuCommonDto {
      */
     private Long minPrice;
 
-    private String skuId;
+    private Long skuId;
 }
