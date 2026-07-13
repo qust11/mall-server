@@ -1,4 +1,4 @@
-package com.ym.promotion.controller;
+package com.ym.promotion.controller.coupon;
 
 import com.ym.common.result.Result;
 import com.ym.promotion.dto.req.CouponReq;
@@ -27,12 +27,10 @@ public class CouponController {
         return Result.success(couponService.savePromotionInfo(couponReq));
     }
 
-
     @GetMapping("/{promotionId}")
     public Result<CouponResp> getCoupon(@PathVariable Long promotionId) {
         return Result.success(couponService.getCouponByPromotionId(promotionId));
     }
-
 
     @PutMapping("/{id}")
     public Result<Void> updateCoupon(@PathVariable Long id, @RequestBody CouponReq couponReq) {

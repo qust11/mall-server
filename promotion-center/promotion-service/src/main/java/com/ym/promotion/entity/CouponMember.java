@@ -1,13 +1,16 @@
 package com.ym.promotion.entity;
 
+import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 /**
  * <p>
@@ -31,5 +34,31 @@ public class CouponMember implements Serializable {
 
     private Long couponId;
 
+    @ApiModelProperty("用户d")
     private Long userId;
+
+    @ApiModelProperty("领取时间")
+    private LocalDateTime receivedTime;
+
+    @ApiModelProperty("过期时间")
+    private LocalDateTime expireTime;
+
+    @ApiModelProperty("使用时间")
+    private LocalDateTime useTime;
+
+    @ApiModelProperty("订单id")
+    private Long orderId;
+
+    @ApiModelProperty("状态")
+    private Integer status;
+
+    @ApiModelProperty("是否删除")
+    @TableLogic(value = "0", delval = "1")
+    private Integer isDeleted;
+
+    @ApiModelProperty("创建时间")
+    private LocalDateTime createTime;
+
+    @ApiModelProperty("更新时间")
+    private LocalDateTime updateTime;
 }

@@ -13,4 +13,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface ICouponMemberService extends IService<CouponMember> {
 
+    Long saveCouponMember(Long promotionId);
+
 }
