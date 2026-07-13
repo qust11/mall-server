@@ -11,6 +11,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @author qushutao
  * @since 2026-07-03
  */
-public interface IFullDiscountService extends IService<FullReduction> {
+public interface IFullReductionService extends IService<FullReduction> {
 
 }

@@ -1,7 +1,7 @@
 package com.ym.promotion.service.abst.impl;
 
 
-import com.ym.promotion.dto.req.CouponReq;
+import com.ym.promotion.dto.req.SeckillReq;
 import com.ym.promotion.service.IPromotionCommonService;
 import com.ym.promotion.service.IPromotionService;
 import com.ym.promotion.service.abst.AbstractPromotion;
@@ -14,15 +14,16 @@ import org.springframework.stereotype.Service;
  * @since 2026-07-06 8:04
  **/
 @Service
-public class CouponPromotionService extends AbstractPromotion<CouponReq> {
+public class SeckillPromotionService extends AbstractPromotion<SeckillReq> {
     private final IPromotionCommonService couponService;
 
-    public CouponPromotionService(@Autowired IPromotionService promotionService, @Qualifier("couponServiceImpl") IPromotionCommonService couponService) {
+    public SeckillPromotionService(@Autowired IPromotionService promotionService, @Qualifier("seckillServiceImpl") IPromotionCommonService couponService) {
         super(promotionService);
         this.couponService = couponService;
     }
+
     @Override
-    protected Long doSavePromotion(Long promotionId, CouponReq promotionBaseDto) {
+    protected Long doSavePromotion(Long promotionId, SeckillReq promotionBaseDto) {
         return couponService.savePromotionInfo(promotionId, promotionBaseDto);
     }
 }

@@ -1,40 +1,20 @@
-package com.ym.promotion.entity;
+package com.ym.promotion.dto.resp;
 
-import com.baomidou.mybatisplus.annotation.TableName;
-import io.swagger.annotations.ApiModel;
+
+import com.ym.promotion.dto.PromotionBaseDto;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.io.Serial;
-import java.io.Serializable;
-
 /**
- * <p>
- * 满减满折
- * </p>
- *
  * @author qushutao
- * @since 2026-07-03
- */
-@TableName("full_reduction")
-@ApiModel(value = "FullDiscount对象", description = "")
+ * @since 2026-07-12 16:42
+ **/
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class FullReduction implements Serializable {
-
-    @Serial
-    private static final long serialVersionUID = 4869802567700172629L;
-
-    private Long id;
-
-    /**
-     * 活动预算
-     */
-    @ApiModelProperty("活动预算")
-    private Long promotionId;
+public class FullReductionResp extends PromotionBaseDto {
 
     /**
      * 折扣类型 1:满减 2:满折
@@ -59,5 +39,5 @@ public class FullReduction implements Serializable {
      */
     @ApiModelProperty("折扣值")
     private Long discountRate;
-}
 
+}

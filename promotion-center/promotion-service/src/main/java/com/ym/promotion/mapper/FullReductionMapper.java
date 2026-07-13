@@ -11,6 +11,6 @@ import com.ym.promotion.entity.FullReduction;
  * @author qushutao
  * @since 2026-07-03
  */
-public interface FullDiscountMapper extends BaseMapper<FullReduction> {
+public interface FullReductionMapper extends BaseMapper<FullReduction> {
 
 }

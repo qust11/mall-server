@@ -36,4 +36,6 @@ public interface IGoodsService {
     void deleteSku(Long skuId);
 
     IPage<GoodsSpuResp> pageHotGoods(PageReq pageReq);
+
+    IPage<GoodsSkuListResp> pageSkus(PageReq pageReq);
 }

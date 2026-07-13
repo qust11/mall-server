@@ -208,4 +208,14 @@ public class GoodsServiceImpl implements IGoodsService {
         populateSkuInfo(resultList);
         return PageUtil.getPage(result, resultList);
     }
+
+    @Override
+    public IPage<GoodsSkuListResp> pageSkus(PageReq pageReq) {
+        IPage<GoodsSku> page = goodsSkuService.page(new Page<>(pageReq.getCurrent(), pageReq.getSize()));
+        if (CollectionUtils.isEmpty(page.getRecords())) {
+            return new Page<>(pageReq.getCurrent(), pageReq.getSize(), page.getTotal());
+        }
+        List<GoodsSkuListResp> goodsSpuList = GoodsSkuConverter.INSTANCE.batchToGoodsResp(page.getRecords());
+        return PageUtil.getPage(page, goodsSpuList);
+    }
 }

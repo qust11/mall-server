@@ -8,9 +8,11 @@ import com.ym.promotion.converter.PromotionConverter;
 import com.ym.promotion.dto.PromotionBaseDto;
 import com.ym.promotion.dto.resp.PromotionListResp;
 import com.ym.promotion.entity.Promotion;
+import com.ym.promotion.factory.PromotionFactory;
 import com.ym.promotion.mapper.PromotionMapper;
 import com.ym.promotion.service.IPromotionService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import lombok.RequiredArgsConstructor;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.stereotype.Service;
 
@@ -18,14 +20,16 @@ import java.util.List;
 
 /**
  * <p>
- *  服务实现类
+ *  服务实现
  * </p>
  *
  * @author qushutao
  * @since 2026-07-03
  */
 @Service
+@RequiredArgsConstructor
 public class PromotionServiceImpl extends ServiceImpl<PromotionMapper, Promotion> implements IPromotionService {
+    private final PromotionFactory promotionFactory;
 
     @Override
     public Long savePromotion(PromotionBaseDto promotionBaseDto) {

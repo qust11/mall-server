@@ -60,6 +60,12 @@ public class AdminGoodsController {
     }
 
 
+    @GetMapping("/all-skus")
+    public Result<IPage<GoodsSkuListResp>> pageSkusBySpuId(@ModelAttribute PageReq pageReq) {
+        return Result.success(goodsService.pageSkus( pageReq));
+    }
+
+
     @PostMapping("/{spuId}/skus")
     public Result<Page<GoodsSkuListResp>> saveSkusBySkuId(@PathVariable Long spuId,
                                                           @RequestBody GoodsSkuReq goodsSkuReq) {

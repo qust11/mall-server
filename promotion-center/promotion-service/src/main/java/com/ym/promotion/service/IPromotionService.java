@@ -3,6 +3,7 @@ package com.ym.promotion.service;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.ym.common.dto.req.PageReq;
 import com.ym.promotion.dto.PromotionBaseDto;
+import com.ym.promotion.dto.PromotionIdBaseDto;
 import com.ym.promotion.dto.resp.PromotionListResp;
 import com.ym.promotion.entity.Promotion;
 import com.baomidou.mybatisplus.extension.service.IService;
