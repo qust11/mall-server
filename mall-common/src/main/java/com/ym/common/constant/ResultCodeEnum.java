@@ -34,6 +34,7 @@ public enum ResultCodeEnum {
     ACTIVITY_NOT_START(50002, "活动未开始"),
     ACTIVITY_START_TIME_ERR(50004, "活动开始时间不能晚于结束时间"),
     ACTIVITY_START_TIME_EARLY(50005, "活动开始时间应晚于当前时间"),
+    ACTIVITY_CREATE_FAILED(50006, "活动创建失败"),
 
     COUPON_EXPIRE(51003, "优惠券已过期"),
     ;
