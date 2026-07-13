@@ -8,4 +8,5 @@ package com.ym.common.constant;
 public class AuthConstant {
 
     public static final String AUTH_USER_ID_HEADER = "X-User-Id";
+    
 }

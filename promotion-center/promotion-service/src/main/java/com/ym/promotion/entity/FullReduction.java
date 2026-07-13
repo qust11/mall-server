@@ -1,5 +1,6 @@
 package com.ym.promotion.entity;
 
+import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -59,5 +60,9 @@ public class FullReduction implements Serializable {
      */
     @ApiModelProperty("折扣值")
     private Long discountRate;
+
+    @TableLogic(value = "0", delval = "1")
+    @ApiModelProperty("逻辑删除")
+    private Integer isDeleted;
 }
 

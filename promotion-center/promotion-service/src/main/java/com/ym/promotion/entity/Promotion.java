@@ -1,5 +1,8 @@
 package com.ym.promotion.entity;
 
+import com.baomidou.mybatisplus.annotation.FieldStrategy;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -63,5 +66,10 @@ public class Promotion implements Serializable {
      * 活动说明
      */
     @ApiModelProperty("活动说明")
+    @TableField(updateStrategy = FieldStrategy.ALWAYS)
     private String promotionDesc;
+
+    @TableLogic(value = "0", delval = "1")
+    @ApiModelProperty("逻辑删除")
+    private Integer isDeleted;
 }

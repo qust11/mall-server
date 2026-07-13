@@ -2,6 +2,7 @@ package com.ym.promotion.dto.resp;
 
 
 import com.ym.promotion.dto.PromotionBaseDto;
+import com.ym.promotion.dto.PromotionIdBaseDto;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,7 +15,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class FullReductionResp extends PromotionBaseDto {
+public class FullReductionResp extends PromotionIdBaseDto {
 
     /**
      * 折扣类型 1:满减 2:满折

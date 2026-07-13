@@ -1,5 +1,8 @@
 package com.ym.promotion.entity;
 
+import com.baomidou.mybatisplus.annotation.FieldStrategy;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableLogic;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -76,8 +79,14 @@ public class Coupon implements Serializable {
      * 领取限制
      */
     @ApiModelProperty("当为指定商品时选定的商品sku集合 以,分割")
-    private String skuIds;
+    @TableField(updateStrategy = FieldStrategy.ALWAYS)
+    private String spuIds;
 
     @ApiModelProperty("当为指定类目时选定的类目id集合 以,分割")
+    @TableField(updateStrategy = FieldStrategy.ALWAYS)
     private String categoryIds;
+
+    @TableLogic(value = "0", delval = "1")
+    @ApiModelProperty("逻辑删除")
+    private Integer isDeleted;
 }

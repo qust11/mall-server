@@ -38,6 +38,6 @@ public class SeckillResp extends PromotionIdBaseDto {
      * 每人限购
      */
     @ApiModelProperty("每人限购")
-    private Integer userLimitNum;
+    private Integer perLimit;
 
 }

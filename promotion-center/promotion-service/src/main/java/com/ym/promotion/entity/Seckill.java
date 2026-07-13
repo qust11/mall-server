@@ -1,5 +1,6 @@
 package com.ym.promotion.entity;
 
+import com.baomidou.mybatisplus.annotation.TableLogic;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -56,6 +57,9 @@ public class Seckill implements Serializable {
      * 每人限购
      */
     @ApiModelProperty("每人限购")
-    private Integer userLimitNum;
+    private Integer perLimit;
 
+    @TableLogic(value = "0", delval = "1")
+    @ApiModelProperty("逻辑删除")
+    private Integer isDeleted;
 }

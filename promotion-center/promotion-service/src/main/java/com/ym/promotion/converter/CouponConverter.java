@@ -1,8 +1,8 @@
 package com.ym.promotion.converter;
 
 
-import com.ym.promotion.dto.PromotionBaseDto;
 import com.ym.promotion.dto.req.CouponReq;
+import com.ym.promotion.dto.resp.CouponResp;
 import com.ym.promotion.entity.Coupon;
 import com.ym.promotion.entity.Promotion;
 import org.mapstruct.Mapper;
@@ -20,10 +20,17 @@ public interface CouponConverter {
     CouponConverter INSTANCE = Mappers.getMapper(CouponConverter.class);
 
     @Mappings({
-            @Mapping(target = "skuIds", ignore = true),
+            @Mapping(target = "spuIds", ignore = true),
             @Mapping(target = "categoryIds", ignore = true),
+            @Mapping(target = "remainStock", source = "stock")
     })
     Coupon toCoupon(CouponReq couponReq);
 
 
+    @Mappings({
+            @Mapping(target = "id", source = "coupon.id"),
+            @Mapping(target = "spuIds", ignore = true),
+            @Mapping(target = "categoryIds", ignore = true),
+    })
+    CouponResp toCouponResp(Promotion promotion, Coupon coupon);
 }

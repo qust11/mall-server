@@ -2,8 +2,12 @@ package com.ym.promotion.converter;
 
 
 import com.ym.promotion.dto.req.FullReductionReq;
+import com.ym.promotion.dto.resp.FullReductionResp;
 import com.ym.promotion.entity.FullReduction;
+import com.ym.promotion.entity.Promotion;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.Mappings;
 import org.mapstruct.factory.Mappers;
 
 /**
@@ -17,5 +21,8 @@ public interface FullReductionConverter {
 
     FullReduction toFullReduction(FullReductionReq fullReductionReq);
 
-
+    @Mappings({
+            @Mapping(source = "fullReduction.id", target = "id"),
+    })
+    FullReductionResp toFullReductionResp(Promotion promotion, FullReduction fullReduction);
 }

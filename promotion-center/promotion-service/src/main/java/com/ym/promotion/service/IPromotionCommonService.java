@@ -9,6 +9,9 @@ import com.ym.promotion.dto.PromotionBaseDto;
  **/
 public interface IPromotionCommonService {
 
-    <T extends PromotionBaseDto> Long savePromotionInfo(Long promotionId, T promotionBaseDto);
+    <T extends PromotionBaseDto> Long savePromotionInfo(T promotionBaseDto);
 
+    <T extends PromotionBaseDto> void updatePromotionInfo(Long id, T promotionBaseDto);
+
+    void deletePromoInfo(Long promotionId);
 }

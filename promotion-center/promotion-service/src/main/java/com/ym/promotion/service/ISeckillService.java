@@ -1,5 +1,6 @@
 package com.ym.promotion.service;
 
+import com.ym.promotion.dto.resp.SeckillResp;
 import com.ym.promotion.entity.Seckill;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -11,6 +12,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @author qushutao
  * @since 2026-07-03
  */
-public interface ISeckillService extends IService<Seckill> {
+public interface ISeckillService extends IService<Seckill>, IPromotionCommonService {
 
+    SeckillResp getSeckillByPromotionId(Long promotionId);
 }

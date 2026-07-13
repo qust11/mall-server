@@ -56,10 +56,14 @@ spring:
               uri: lb://cart-service
               predicates:
                 - Path=/cart-service/**
+              filters:
+                - StripPrefix=1
             - id: promotionRoute
               uri: lb://promotion-service
               predicates:
                 - Path=/promotion-service/**
+              filters:
+                - StripPrefix=1
           globalcors:
             # 放行OPTIONS预检请求，核心配置
             add-to-simple-url-handler-mapping: true

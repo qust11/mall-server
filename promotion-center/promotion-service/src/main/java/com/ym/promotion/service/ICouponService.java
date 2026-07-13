@@ -1,5 +1,6 @@
 package com.ym.promotion.service;
 
+import com.ym.promotion.dto.resp.CouponResp;
 import com.ym.promotion.entity.Coupon;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -11,6 +12,9 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @author qushutao
  * @since 2026-07-03
  */
-public interface ICouponService extends IService<Coupon> {
+public interface ICouponService extends IService<Coupon>, IPromotionCommonService {
+
+    CouponResp getCouponByPromotionId(Long promotionId);
+
 
 }

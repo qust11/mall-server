@@ -1,10 +1,8 @@
 package com.ym.promotion.converter;
 
 
-import com.ym.promotion.dto.req.FullReductionReq;
 import com.ym.promotion.dto.req.SeckillReq;
 import com.ym.promotion.dto.resp.SeckillResp;
-import com.ym.promotion.entity.FullReduction;
 import com.ym.promotion.entity.Promotion;
 import com.ym.promotion.entity.Seckill;
 import org.mapstruct.Mapper;
@@ -25,7 +23,7 @@ public interface SeckillConverter {
     Seckill toSeckill(SeckillReq seckillReq);
 
     @Mappings({
-            @Mapping(source = "promotion.id", target = "id"),
+            @Mapping(source = "seckill.id", target = "id"),
     })
     SeckillResp toSeckillResp(Promotion promotion, Seckill seckill);
 }

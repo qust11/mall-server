@@ -1,16 +1,11 @@
 package com.ym.promotion.controller;
 
 import com.ym.common.result.Result;
-import com.ym.promotion.dto.req.FullReductionReq;
 import com.ym.promotion.dto.req.SeckillReq;
-import com.ym.promotion.service.abst.impl.FullReductionPromotionService;
-import com.ym.promotion.service.abst.impl.SeckillPromotionService;
+import com.ym.promotion.dto.resp.SeckillResp;
+import com.ym.promotion.service.ISeckillService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * <p>
@@ -24,10 +19,28 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/promotion/seckill")
 @RequiredArgsConstructor
 public class SeckillController {
-    private final SeckillPromotionService seckillPromotionService;
+
+    private final ISeckillService seckillService;
 
     @PostMapping
-    public Result<Long> createCoupon(@RequestBody SeckillReq seckillReq) {
-        return Result.success(seckillPromotionService.savePromotion( seckillReq));
+    public Result<Long> createSeckill(@RequestBody SeckillReq seckillReq) {
+        return Result.success(seckillService.savePromotionInfo( seckillReq));
+    }
+
+    @GetMapping("/{promotionId}")
+    public Result<SeckillResp> getSeckill(@PathVariable Long promotionId) {
+        return Result.success(seckillService.getSeckillByPromotionId(promotionId));
+    }
+
+    @PutMapping("/{id}")
+    public Result<Void> updateSeckill(@PathVariable Long id, @RequestBody SeckillReq seckillReq) {
+        seckillService.updatePromotionInfo(id, seckillReq);
+        return Result.success();
+    }
+
+    @DeleteMapping("/{promotionId}")
+    public Result<Void> deleteSeckill(@PathVariable Long promotionId) {
+        seckillService.deletePromoInfo(promotionId);
+        return Result.success();
     }
 }
