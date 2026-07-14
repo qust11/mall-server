@@ -6,6 +6,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.ComponentScans;
 
@@ -24,6 +25,7 @@ import org.springframework.context.annotation.ComponentScans;
 @MapperScan("com.ym.promotion.mapper")
 @ComponentScans( value = {@ComponentScan("com.ym.promotion"), @ComponentScan("com.ym.common")})
 @ServletComponentScan
+@EnableFeignClients(basePackages = "com.ym.product.api")
 public class PromotionApplication {
     public static void main(String[] args) {
         SpringApplication.run(PromotionApplication.class, args);

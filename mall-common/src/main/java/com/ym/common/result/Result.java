@@ -37,4 +37,8 @@ public class Result<T> {
     public static <T> Result<T> fail(ResultCodeEnum resultCodeEnum, String msg) {
         return new Result<>(resultCodeEnum.getCode(), msg, null);
     }
+
+    public Boolean isSuccess() {
+        return this.code == 200;
+    }
 }

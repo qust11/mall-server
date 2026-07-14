@@ -2,10 +2,14 @@ package com.ym.promotion.filter;
 
 
 import cn.hutool.core.util.RandomUtil;
+import com.ym.common.constant.AuthConstant;
+import com.ym.common.constant.ResultCodeEnum;
+import com.ym.common.exception.BusinessException;
 import com.ym.common.util.UserHolderUtil;
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpServletRequest;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.core.annotation.Order;
 
 import java.io.IOException;
@@ -23,14 +27,14 @@ public class CustomFilter implements Filter {
             // 1. 解析token，拿到用户
             // 强转为HttpServletRequest
             HttpServletRequest httpReq = (HttpServletRequest) req;
-            // 根据header名称取值（不区分大小写）
-//            String userIdStr = httpReq.getHeader(AuthConstant.AUTH_USER_ID_HEADER);
-//            if (StringUtils.isBlank( userIdStr)){
-//                throw new BusinessException(ResultCodeEnum.NOT_LOGIN);
-//            }
-//            UserHolderUtil.set(Long.valueOf(userIdStr));
-            long l = RandomUtil.randomLong(100000, 100000000010000L);
-            UserHolderUtil.set(l);
+//             根据header名称取值（不区分大小写）
+            String userIdStr = httpReq.getHeader(AuthConstant.AUTH_USER_ID_HEADER);
+            if (StringUtils.isBlank( userIdStr)){
+                throw new BusinessException(ResultCodeEnum.NOT_LOGIN);
+            }
+            UserHolderUtil.set(Long.valueOf(userIdStr));
+//            long l = RandomUtil.randomLong(100000, 100000000010000L);
+//            UserHolderUtil.set(l);
             filterChain.doFilter(req, resp); // 放行走后面mvc、controller
         } finally {
             UserHolderUtil.clear();

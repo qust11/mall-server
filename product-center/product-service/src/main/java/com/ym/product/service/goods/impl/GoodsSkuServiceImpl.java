@@ -54,10 +54,10 @@ public class GoodsSkuServiceImpl extends ServiceImpl<GoodsSkuMapper, GoodsSku> i
                 throw new BusinessException(ResultCodeEnum.ACTIVITY_CREATE_FAILED, "库存不足");
             }
             update(new LambdaUpdateWrapper<GoodsSku>().eq(GoodsSku::getId, goodsSku.getId()).setDecrBy(GoodsSku::getRemainStock, lockStock).setIncrBy(GoodsSku::getLockStock, lockStock));
-        } catch (Exception e) {
+        } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
             throw new BusinessException(ResultCodeEnum.ACTIVITY_CREATE_FAILED);
-        } finally {
+        }finally {
             if (lock.isHeldByCurrentThread()) {
                 lock.unlock();
             }

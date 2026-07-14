@@ -3,6 +3,9 @@ package com.ym.promotion.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.ym.common.constant.ResultCodeEnum;
 import com.ym.common.exception.BusinessException;
+import com.ym.common.result.Result;
+import com.ym.product.api.GoodSkuClient;
+import com.ym.product.dto.GoodsSkuLockDto;
 import com.ym.promotion.constant.PromotionRedisConstant;
 import com.ym.promotion.converter.SeckillConverter;
 import com.ym.promotion.dto.PromotionBaseDto;
@@ -39,6 +42,8 @@ public class SeckillServiceImpl extends ServiceImpl<SeckillMapper, Seckill> impl
 
     private final RedissonClient redisson;
 
+    private final GoodSkuClient goodSkuClient;
+
     @Override
     public <T extends PromotionBaseDto> Long savePromotionInfo(T promotionBaseDto) {
         RLock lock = redisson.getLock(PromotionRedisConstant.PROMOTION_SECKILL_CREATED_KEY_PREFIX);
@@ -47,8 +52,14 @@ public class SeckillServiceImpl extends ServiceImpl<SeckillMapper, Seckill> impl
             if (!isLocked) {
                 throw new BusinessException(ResultCodeEnum.ACTIVITY_CREATE_FAILED,"活动创建失败，获取锁信息失败");
             }
-            // 查询是否有相同时间段的秒杀商品 如果有则不允许新增秒杀活动
+
             SeckillReq seckillReq = (SeckillReq) promotionBaseDto;
+            GoodsSkuLockDto skuLockDto = new GoodsSkuLockDto(seckillReq.getSkuId(), seckillReq.getSeckillStock());
+            Result<Void> voidResult = goodSkuClient.skuLockStock(skuLockDto);
+            if (!voidResult.isSuccess()) {
+                throw new BusinessException(ResultCodeEnum.ACTIVITY_CREATE_FAILED, voidResult.getMsg());
+            }
+            // 查询是否有相同时间段的秒杀商品 如果有则不允许新增秒杀活动
             int count =  baseMapper.countBySkuAndTime(seckillReq.getSkuId(), promotionBaseDto.getStartTime(), promotionBaseDto.getEndTime());
             if (count > 0) {
                 throw new BusinessException(ResultCodeEnum.ACTIVITY_CREATE_FAILED,"活动创建失败，相同时间段的秒杀商品已存在");
@@ -62,6 +73,10 @@ public class SeckillServiceImpl extends ServiceImpl<SeckillMapper, Seckill> impl
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
             throw new BusinessException(ResultCodeEnum.ACTIVITY_CREATE_FAILED);
+        } finally {
+            if (lock.isHeldByCurrentThread()){
+                lock.unlock();
+            }
         }
 
     }
