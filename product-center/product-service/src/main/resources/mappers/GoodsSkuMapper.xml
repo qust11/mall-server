@@ -17,7 +17,7 @@
                 MIN(price) AS minPrice,
                 MAX(price) AS maxPrice,
                 COUNT(0) AS skuCount,
-                SUM(stock) AS stockCount
+                SUM(remain_stock) AS stockCount
             FROM goods_sku
             WHERE spu_id IN
             <foreach item="item" collection="spuIds" separator="," open="(" close=")" index="">

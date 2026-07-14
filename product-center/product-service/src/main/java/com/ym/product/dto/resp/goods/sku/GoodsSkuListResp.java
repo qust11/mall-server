@@ -57,10 +57,10 @@ public class GoodsSkuListResp {
     private Long price;
 
     /**
-     * 现有库存
+     * 总库存
      */
-    @ApiModelProperty("现有库存")
-    private Integer stock;
+    @ApiModelProperty("总库存")
+    private Integer totalStock;
 
     /**
      * 锁单库存

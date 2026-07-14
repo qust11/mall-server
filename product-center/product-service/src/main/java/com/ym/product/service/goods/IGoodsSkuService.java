@@ -2,6 +2,7 @@ package com.ym.product.service.goods;
 
 import com.ym.product.bo.goods.GoodsNumBO;
 import com.ym.product.bo.goods.GoodsPriceBO;
+import com.ym.product.dto.GoodsSkuLockDto;
 import com.ym.product.entity.goods.GoodsSku;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -19,5 +20,6 @@ public interface IGoodsSkuService extends IService<GoodsSku> {
 
     List<GoodsNumBO> getGoodsNumBOListBySpuIds(List<Long> spuIds);
 
-    GoodsPriceBO getSpuRangePrice(Long spuId);
+    void skuLockStock(GoodsSkuLockDto goodsSkuLockDto);
+
 }

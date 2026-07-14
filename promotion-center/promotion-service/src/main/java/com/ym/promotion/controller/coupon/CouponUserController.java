@@ -1,7 +1,6 @@
 package com.ym.promotion.controller.coupon;
 
 import com.ym.common.result.Result;
-import com.ym.promotion.dto.req.CouponReq;
 import com.ym.promotion.service.ICouponMemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -21,9 +20,9 @@ public class CouponUserController {
 
     private final ICouponMemberService couponMemberService;
 
-    @PostMapping("/receive/{promotionId}")
-    public Result<Long> receiveCoupon(@PathVariable Long promotionId) {
-        return Result.success(couponMemberService.saveCouponMember(promotionId));
+    @PostMapping("/receive/{couponId}")
+    public Result<Long> receiveCoupon(@PathVariable Long couponId) {
+        return Result.success(couponMemberService.saveCouponMember(couponId));
     }
 
 }

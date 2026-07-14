@@ -2,7 +2,6 @@ package com.ym.product.service.goods;
 
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.ym.common.dto.req.PageReq;
 import com.ym.product.dto.req.GoodsReq;
 import com.ym.product.dto.req.GoodsSkuReq;
@@ -21,7 +20,7 @@ public interface IGoodsService {
 
     GoodsSpuListResp updateGoods(Long id , GoodsUpdateReq goodsUpdateReq);
 
-    GoodsSpuListResp saveGoods(GoodsUpdateReq goodsUpdateReq);
+    GoodsSpuListResp saveGoodsSpu(GoodsUpdateReq goodsUpdateReq);
 
     GoodsSpuDetailResp getGood(Long id);
 

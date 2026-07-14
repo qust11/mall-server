@@ -24,6 +24,7 @@ public enum ResultCodeEnum {
     // 商品 3xxx
     GOODS_NOT_EXIST(30001, "商品不存在"),
     STOCK_SHORT(30002, "库存不足"),
+    GOODS_SKU_CHANGE_FAILED(31002, "商品SKU规格库存"),
 
     // 订单 4xxx
     ORDER_NOT_EXIST(40001, "订单不存在"),

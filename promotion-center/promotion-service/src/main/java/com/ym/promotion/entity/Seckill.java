@@ -48,6 +48,12 @@ public class Seckill implements Serializable {
     private Integer seckillStock;
 
     /**
+     * 剩余库存
+     */
+    @ApiModelProperty("剩余库存")
+    private Integer remainStock;
+
+    /**
      * 秒杀商品
      */
     @ApiModelProperty("秒杀商品")

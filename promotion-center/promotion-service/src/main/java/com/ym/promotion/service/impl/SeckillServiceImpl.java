@@ -15,7 +15,6 @@ import com.ym.promotion.service.IPromotionService;
 import com.ym.promotion.service.ISeckillService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.RequiredArgsConstructor;
-import org.redisson.Redisson;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
 import org.springframework.stereotype.Service;
@@ -57,6 +56,7 @@ public class SeckillServiceImpl extends ServiceImpl<SeckillMapper, Seckill> impl
             Long promotionId = promotionService.savePromotion(promotionBaseDto);
             Seckill seckill = SeckillConverter.INSTANCE.toSeckill(seckillReq);
             seckill.setPromotionId(promotionId);
+            seckill.setRemainStock(seckill.getSeckillStock());
             this.save(seckill);
             return seckill.getId();
         } catch (InterruptedException e) {
@@ -74,6 +74,7 @@ public class SeckillServiceImpl extends ServiceImpl<SeckillMapper, Seckill> impl
         SeckillReq seckillReq = (SeckillReq) promotionBaseDto;
         Seckill seckill = SeckillConverter.INSTANCE.toSeckill(seckillReq);
         seckill.setId(dbSeckill.getId());
+        seckill.setRemainStock(seckill.getSeckillStock());
         this.updateById(seckill);
     }
 
@@ -89,7 +90,6 @@ public class SeckillServiceImpl extends ServiceImpl<SeckillMapper, Seckill> impl
     public SeckillResp getSeckillByPromotionId(Long promotionId) {
         Promotion promotion = Optional.ofNullable(promotionService.getById(promotionId)).orElseThrow(() -> new BusinessException(ResultCodeEnum.ACTIVITY_NOT_EXIST));
         Seckill seckill = this.getOne(new LambdaQueryWrapper<Seckill>().eq(Seckill::getPromotionId, promotionId));
-        SeckillResp seckillResp = SeckillConverter.INSTANCE.toSeckillResp(promotion, seckill);
-        return seckillResp;
+        return SeckillConverter.INSTANCE.toSeckillResp(promotion, seckill);
     }
 }

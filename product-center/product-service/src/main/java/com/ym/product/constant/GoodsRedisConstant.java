@@ -14,5 +14,8 @@ public class GoodsRedisConstant {
 
 
     // redission key
-    public static final String GOODS_SPU_CODE_LOCK_KEY = "goods:spu:code:generate:lock";
+    public static final String GOODS_SPU_CODE_LOCK_KEY = "GOODS:SPU:CODE:GENERATE:LOCK";
+    // redission key
+    public static final String GOODS_SKU_LOCK_STOCK_PREFIX = "GOODS:SKU:LOCK_STOCK:";
+
 }

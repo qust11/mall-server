@@ -45,7 +45,7 @@ public class AdminGoodsController {
 
     @PostMapping
     public Result<GoodsSpuListResp> saveGoods(@RequestBody GoodsUpdateReq goodsUpdateReq) {
-        return Result.success(goodsService.saveGoods(goodsUpdateReq));
+        return Result.success(goodsService.saveGoodsSpu(goodsUpdateReq));
     }
 
     @DeleteMapping("/{id}")

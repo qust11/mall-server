@@ -4,8 +4,10 @@ package com.ym.product.service.goods.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.ym.common.constant.ResultCodeEnum;
 import com.ym.common.dto.req.PageReq;
 import com.ym.common.enums.YesNoEnums;
+import com.ym.common.exception.BusinessException;
 import com.ym.common.util.PageUtil;
 import com.ym.common.util.RedisUtil;
 import com.ym.product.bo.goods.GoodsNumBO;
@@ -112,7 +114,7 @@ public class GoodsServiceImpl implements IGoodsService {
     }
 
     @Override
-    public GoodsSpuListResp saveGoods(GoodsUpdateReq goodsUpdateReq) {
+    public GoodsSpuListResp saveGoodsSpu(GoodsUpdateReq goodsUpdateReq) {
         RLock lock = redisson.getLock(GoodsRedisConstant.GOODS_SPU_CODE_LOCK_KEY);
         try {
             boolean isLock = lock.tryLock(GoodsRedisConstant.EXPIRE_TIME_FIVE_SECONDS, GoodsRedisConstant.EXPIRE_TIME_TEN_SECONDS, TimeUnit.SECONDS);
@@ -183,8 +185,12 @@ public class GoodsServiceImpl implements IGoodsService {
         if (null == dbGoodsSku) {
             return;
         }
+        if (goodsSkuReq.getTotalStock() < dbGoodsSku.getLockStock()) {
+            throw new BusinessException(ResultCodeEnum.GOODS_SKU_CHANGE_FAILED);
+        }
         GoodsSku goodsSku = GoodsSkuConverter.INSTANCE.toGoodsSku(goodsSkuReq);
         goodsSku.setId(skuId);
+        goodsSku.setRemainStock(goodsSkuReq.getTotalStock() - dbGoodsSku.getLockStock());
         goodsSkuService.updateById(goodsSku);
     }
 
@@ -192,6 +198,7 @@ public class GoodsServiceImpl implements IGoodsService {
     public void saveSkusBySkuId(Long spuId, GoodsSkuReq goodsSkuReq) {
         GoodsSku goodsSku = GoodsSkuConverter.INSTANCE.toGoodsSku(goodsSkuReq);
         goodsSku.setSpuId(spuId);
+        goodsSku.setRemainStock(goodsSku.getTotalStock());
         goodsSkuService.save(goodsSku);
     }
 

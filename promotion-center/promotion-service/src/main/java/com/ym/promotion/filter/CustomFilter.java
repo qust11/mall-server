@@ -1,7 +1,7 @@
 package com.ym.promotion.filter;
 
 
-import com.ym.common.constant.AuthConstant;
+import cn.hutool.core.util.RandomUtil;
 import com.ym.common.util.UserHolderUtil;
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebFilter;
@@ -24,7 +24,13 @@ public class CustomFilter implements Filter {
             // 强转为HttpServletRequest
             HttpServletRequest httpReq = (HttpServletRequest) req;
             // 根据header名称取值（不区分大小写）
-            UserHolderUtil.set(Long.valueOf(httpReq.getHeader(AuthConstant.AUTH_USER_ID_HEADER)));
+//            String userIdStr = httpReq.getHeader(AuthConstant.AUTH_USER_ID_HEADER);
+//            if (StringUtils.isBlank( userIdStr)){
+//                throw new BusinessException(ResultCodeEnum.NOT_LOGIN);
+//            }
+//            UserHolderUtil.set(Long.valueOf(userIdStr));
+            long l = RandomUtil.randomLong(100000, 100000000010000L);
+            UserHolderUtil.set(l);
             filterChain.doFilter(req, resp); // 放行走后面mvc、controller
         } finally {
             UserHolderUtil.clear();

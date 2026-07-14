@@ -72,10 +72,16 @@ public class GoodsSku implements Serializable {
     private Long price;
 
     /**
-     * 现有库存
+     * 总库存
      */
-    @ApiModelProperty("现有库存")
-    private Integer stock;
+    @ApiModelProperty("总库存")
+    private Integer totalStock;
+
+    /**
+     * 剩余/可用 库存
+     */
+    @ApiModelProperty("剩余/可用 库存")
+    private Integer remainStock;
 
     /**
      * 锁单库存

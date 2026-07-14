@@ -46,10 +46,10 @@ public class GoodsSkuReq  {
     private Long price;
 
     /**
-     * 现有库存
+     * 总库存
      */
     @ApiModelProperty("现有库存")
-    private Integer stock;
+    private Integer totalStock;
 
     /**
      * 成本价格

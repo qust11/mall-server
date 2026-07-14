@@ -45,28 +45,29 @@ public class CouponMemberServiceImpl extends ServiceImpl<CouponMemberMapper, Cou
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public Long saveCouponMember(Long promotionId) {
-        RLock lock = redisson.getLock(PromotionRedisConstant.PROMOTION_SECKILL_CREATED_KEY_PREFIX + promotionId);
+    public Long saveCouponMember(Long couponId) {
+        RLock lock = redisson.getLock(PromotionRedisConstant.PROMOTION_SECKILL_CREATED_KEY_PREFIX + couponId);
         try {
             boolean isLocked = lock.tryLock(PromotionRedisConstant.EXPIRE_TIME_FIVE_SECONDS, PromotionRedisConstant.EXPIRE_TIME_TEN_SECONDS, TimeUnit.SECONDS);
             if (!isLocked) {
                 throw new BusinessException(ResultCodeEnum.COUPON_RECEIVE_HAS_ERROR);
             }
             LocalDateTime now = LocalDateTime.now();
-            Promotion promotion = Optional.ofNullable( promotionService.getById(promotionId)).orElseThrow(() -> new BusinessException(ResultCodeEnum.ACTIVITY_NOT_EXIST,"优惠券信息不存在"));
-            if (promotion.getStartTime().isAfter(now)){
-                throw new BusinessException(ResultCodeEnum.COUPON_RECEIVE_HAS_ERROR,"优惠券领取失败，优惠券未开始");
-            }
-            if (promotion.getEndTime().isBefore(now)){
-                throw new BusinessException(ResultCodeEnum.COUPON_RECEIVE_HAS_ERROR,"优惠券领取失败，优惠券已结束");
-            }
-            Coupon coupon = Optional.ofNullable(couponService.getById(promotionId)).orElseThrow(() -> new BusinessException(ResultCodeEnum.ACTIVITY_NOT_EXIST,"优惠券信息不存在"));
-
+            Coupon coupon = Optional.ofNullable(couponService.getById(couponId)).orElseThrow(() -> new BusinessException(ResultCodeEnum.ACTIVITY_NOT_EXIST, "优惠券信息不存在"));
             if (coupon.getRemainStock() <= NumberConstan.ZERO) {
-                throw new BusinessException(ResultCodeEnum.STOCK_SHORT,"优惠券库存不足");
+                throw new BusinessException(ResultCodeEnum.STOCK_SHORT, "优惠券库存不足");
             }
+
+            Promotion promotion = Optional.ofNullable(promotionService.getById(coupon.getPromotionId())).orElseThrow(() -> new BusinessException(ResultCodeEnum.ACTIVITY_NOT_EXIST, "优惠券信息不存在"));
+            if (promotion.getStartTime().isAfter(now)) {
+                throw new BusinessException(ResultCodeEnum.COUPON_RECEIVE_HAS_ERROR, "优惠券领取失败，优惠券未开始");
+            }
+            if (promotion.getEndTime().isBefore(now)) {
+                throw new BusinessException(ResultCodeEnum.COUPON_RECEIVE_HAS_ERROR, "优惠券领取失败，优惠券已结束");
+            }
+
             // 优惠券扣减内存
-            couponService.update(new LambdaUpdateWrapper<Coupon>().eq(Coupon::getId, promotionId).setDecrBy(Coupon::getRemainStock, NumberConstan.ONE));
+            couponService.update(new LambdaUpdateWrapper<Coupon>().eq(Coupon::getId, couponId).setDecrBy(Coupon::getRemainStock, NumberConstan.ONE));
             // 获取活动时间
             CouponMember couponMember = new CouponMember();
             couponMember.setExpireTime(promotion.getEndTime());
@@ -79,6 +80,10 @@ public class CouponMemberServiceImpl extends ServiceImpl<CouponMemberMapper, Cou
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
             throw new BusinessException(ResultCodeEnum.COUPON_RECEIVE_HAS_ERROR);
+        } finally {
+            if (lock.isHeldByCurrentThread()) {
+                lock.unlock();
+            }
         }
     }
 }

@@ -1,4 +1,4 @@
-package com.ym.promotion.controller;
+package com.ym.promotion.controller.seckill;
 
 import com.ym.common.result.Result;
 import com.ym.promotion.dto.req.SeckillReq;
