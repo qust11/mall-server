@@ -38,7 +38,7 @@ public class GoodsUpdateReq {
      * 品牌ID（可单独建brand表）
      */
     @ApiModelProperty("品牌ID（可单独建brand表）")
-    private Integer brandId;
+    private Long brandId;
 
     /**
      * 商品主图

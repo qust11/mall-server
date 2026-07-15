@@ -4,9 +4,11 @@ package com.ym.product;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.ComponentScans;
+import org.springframework.data.elasticsearch.repository.config.EnableElasticsearchRepositories;
 
 /**
  * ${description}
@@ -18,6 +20,8 @@ import org.springframework.context.annotation.ComponentScans;
 })
 @EnableDiscoveryClient
 @MapperScan("com.ym.product.mapper")
+@ServletComponentScan
+@EnableElasticsearchRepositories("com.ym.product.repository")
 @ComponentScans( value = {@ComponentScan("com.ym.product"), @ComponentScan("com.ym.common")})
 public class ProductApplication {
     public static void main(String[] args) {

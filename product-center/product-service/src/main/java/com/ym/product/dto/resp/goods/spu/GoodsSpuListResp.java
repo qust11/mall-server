@@ -31,12 +31,6 @@ public class GoodsSpuListResp extends GoodsSpuCommonDto {
      */
     private String spuCode;
 
-
-    /**
-     * spu id
-     */
-    private Long id;
-
     /**
      * 副标题卖点
      */

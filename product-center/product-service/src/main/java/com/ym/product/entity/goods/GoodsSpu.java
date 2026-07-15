@@ -59,8 +59,8 @@ public class GoodsSpu implements Serializable {
     /**
      * 品牌ID（可单独建brand表）
      */
-    @ApiModelProperty("品牌ID（可单独建brand表）")
-    private Integer brandId;
+    @ApiModelProperty("品牌ID")
+    private Long brandId;
 
     /**
      * 商品主图

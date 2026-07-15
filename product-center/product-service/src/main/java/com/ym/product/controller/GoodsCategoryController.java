@@ -3,7 +3,7 @@ package com.ym.product.controller;
 
 import com.ym.common.result.Result;
 import com.ym.product.dto.resp.category.PrimaryCategoryResp;
-import com.ym.product.service.goods.IGoodsCategoryService;
+import com.ym.product.service.goods.core.IGoodsCategoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

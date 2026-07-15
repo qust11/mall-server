@@ -20,3 +20,6 @@ spring:
       discovery:
         access-key: VGhpc0lzTXlDdXN0b21TZWNyZXRLZXkwMTIzNDU2Nzg=
         namespace: 5cfb9e33-bd54-4203-989b-a09c9e604a25
+    feign:
+      servlet:
+        enabled: true

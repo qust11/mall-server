@@ -1,0 +1,42 @@
+# 商品信息
+PUT /goods_spu
+{
+  "mappings": {
+    "properties": {
+      "id":{
+        "type": "long"
+      },
+      "goodsName":{
+        "type": "text",
+        "analyzer": "ik_smart"
+      },
+      "brandName":{
+        "type": "keyword"
+      },
+      "skuCount":{
+        "type": "long",
+        "index": false
+      },
+      "stockCount":{
+        "type":"long",
+        "index": "false"
+      },
+      "maxPrice":{
+        "type":"long"
+      },
+      "minPrice":{
+        "type":"long"
+      },
+      "subTitle":{
+        "type": "text",
+        "analyzer": "ik_smart"
+      },
+      "categoryId":{
+        "type": "long"
+      },
+      "mainImg":{
+        "type": "keyword"
+      }
+    }
+  }
+}

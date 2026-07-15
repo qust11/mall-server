@@ -46,5 +46,6 @@ public class GoodsSpuCommonDto {
      */
     private Long minPrice;
 
+
     private Long skuId;
 }
