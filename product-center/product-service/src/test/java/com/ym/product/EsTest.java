@@ -1,8 +1,10 @@
 package com.ym.product;
 
+import com.ym.common.dto.req.PageReq;
 import com.ym.product.bo.goods.GoodsNumBO;
 import com.ym.product.entity.elastic.GoodsSpuDoc;
 import com.ym.product.entity.goods.GoodsSpu;
+import com.ym.product.repository.GoodsSpuRepository;
 import com.ym.product.service.elastic.GoodsSpuEsService;
 import com.ym.product.service.goods.core.IGoodsBrandService;
 import com.ym.product.service.goods.core.IGoodsCategoryService;
@@ -11,6 +13,9 @@ import com.ym.product.service.goods.core.IGoodsSpuService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 
 import java.io.IOException;
 import java.util.List;
@@ -35,7 +40,6 @@ public class EsTest {
     private IGoodsBrandService goodsBrandService;
     @Autowired
     private IGoodsSkuService goodsSkuService;
-
     @Test
     public void getHeima() throws IOException {
         List<GoodsSpu> list = goodsSpuService.list();
@@ -43,9 +47,7 @@ public class EsTest {
         List<GoodsNumBO> goodsNumBOList = goodsSkuService.getGoodsNumBOListBySpuIds(spuIds);
         Map<Long, GoodsNumBO> skuIdToNumMap = goodsNumBOList.stream().collect(Collectors.toMap(GoodsNumBO::getSpuId, Function.identity(), (v1, v2) -> v1));
         for (GoodsSpu goodsSpu : list) {
-            if (goodsSpu.getId() != 10) {
-                continue;
-            }
+
             GoodsSpuDoc entity = new GoodsSpuDoc();
             GoodsNumBO goodsNumBO = skuIdToNumMap.get(goodsSpu.getId());
             entity.setId(goodsSpu.getId());
@@ -64,9 +66,20 @@ public class EsTest {
             entity.setIsHot(goodsSpu.getIsHot());
             entity.setIsNew(goodsSpu.getIsNew());
             entity.setSales(goodsSpu.getSales());
-            goodsSpuEsService.save(entity);
+            entity.setSpuCode(goodsSpu.getSpuCode());
+
+//            goodsSpuEsService.save(entity);
 
             goodsSpuEsService.updatePart(entity);
         }
+    }
+
+    @Test
+    public void get2() throws IOException {
+        com.baomidou.mybatisplus.core.metadata.IPage<GoodsSpuDoc> page = goodsSpuEsService.getAll("小米", 1, null, new PageReq(1, 10));
+        System.out.println(page);
+
+//        Page<GoodsSpuDoc> page1 = goodsSpuRepository.findByAllMatchesAndIsHotEquals("华为", 1, PageRequest.of(1, 10));
+//        System.out.println(page1);
     }
 }

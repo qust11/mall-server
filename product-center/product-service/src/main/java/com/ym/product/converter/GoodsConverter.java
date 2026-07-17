@@ -5,6 +5,7 @@ import com.ym.product.dto.req.GoodsUpdateReq;
 import com.ym.product.dto.resp.goods.spu.GoodsSpuDetailResp;
 import com.ym.product.dto.resp.goods.spu.GoodsSpuListResp;
 import com.ym.product.dto.resp.goods.spu.GoodsSpuResp;
+import com.ym.product.entity.elastic.GoodsSpuDoc;
 import com.ym.product.entity.goods.GoodsSpu;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
@@ -32,4 +33,9 @@ public interface GoodsConverter {
     GoodsSpuResp toGoodsSpuResp(GoodsSpu goodsSpu);
 
     List<GoodsSpuResp> batchToGoodsSpuResp(List<GoodsSpu> records);
+
+
+    GoodsSpuResp docToGoodsSpuResp(GoodsSpuDoc goodsSpuDoc);
+
+    List<GoodsSpuResp> batchDocToGoodsSpuResp(List<GoodsSpuDoc> records);
 }

@@ -23,13 +23,13 @@ public class GoodsSpuDoc {
     @Id
     private Long id;
 
-    @Field(type = FieldType.Text, analyzer = "ik_smart")
+    @Field(type = FieldType.Text, analyzer = "ik_smart",copyTo = "all")
     private String goodsName;
     /**
      * 品牌名称
      */
 
-    @Field(type = FieldType.Keyword)
+    @Field(type = FieldType.Keyword,copyTo = "all")
     private String brandName;
 
     /**
@@ -68,7 +68,7 @@ public class GoodsSpuDoc {
     /**
      * 副标题卖点
      */
-    @Field(type = FieldType.Text, analyzer = "ik_smart")
+    @Field(type = FieldType.Text, analyzer = "ik_smart",copyTo = "all")
     private String subTitle;
 
     /**
@@ -96,4 +96,10 @@ public class GoodsSpuDoc {
 
     @Field(type = FieldType.Long)
     private Long sales;
+
+    @Field(type = FieldType.Text,analyzer = "ik_smart")
+    private String all;
+
+    @Field(type = FieldType.Keyword)
+    private String spuCode;
 }

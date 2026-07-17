@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/goods/sku")
 @RequiredArgsConstructor
-public class GoodSkuController implements GoodSkuClient {
+public class GoodSkuApi implements GoodSkuClient {
 
     private final IGoodsSkuService goodsSkuService;
     @Override

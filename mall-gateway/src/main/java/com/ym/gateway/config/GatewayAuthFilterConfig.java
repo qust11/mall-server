@@ -68,9 +68,14 @@ public class GatewayAuthFilterConfig {
             if (isWhiteApi(path)) {
                 return chain.filter(exchange);
             }
-
+            // 4. Token鉴权、过期、登录状态校验
+            String token = getToken(request);
             // 2. 商品信息直接放行
             if (path.startsWith("/goods")) {
+                if (StringUtils.isNotBlank(token)){
+                    ServerHttpRequest newReq = checkAndSetHeaderToken(token, request);
+                    return chain.filter(exchange.mutate().request(newReq).build());
+                }
                 return chain.filter(exchange);
             }
 
@@ -82,30 +87,36 @@ public class GatewayAuthFilterConfig {
             }
 
 
-            // 4. Token鉴权、过期、登录状态校验
-            String token = getToken(request);
             if (StringUtils.isBlank(token)) {
                 return writeError(response, 401, "未携带登录凭证，请登录");
             }
 
             try {
-                // 校验token合法性与过期
-                jwtUtil.validateToken(token);
-                Long userId = jwtUtil.getUserIdFromToken(token);
-//                // Redis校验登录状态（退出登录会删除该key）
-//                Boolean loginExist = redisUtil.hasKey(USER_LOGIN_KEY + userId);
-//                if (BooleanUtils.isFalse(loginExist)) {
-//                    return writeError(response, 401, "登录已失效，请重新登录");
-//                }
-                // 透传用户ID到下游微服务
-                ServerHttpRequest newReq = request.mutate()
-                        .header(AuthConstant.AUTH_USER_ID_HEADER, userId.toString())
-                        .build();
+                if (StringUtils.isBlank(token)) {
+                    return writeError(response, 401, "未登录，请登录");
+                }
+                ServerHttpRequest newReq = checkAndSetHeaderToken(token, request);
                 return chain.filter(exchange.mutate().request(newReq).build());
             } catch (RuntimeException e) {
                 return writeError(response, 401, e.getMessage());
             }
         };
+    }
+
+    private ServerHttpRequest checkAndSetHeaderToken(String token, ServerHttpRequest request) {
+        // 校验token合法性与过期
+        jwtUtil.validateToken(token);
+        Long userId = jwtUtil.getUserIdFromToken(token);
+//                // Redis校验登录状态（退出登录会删除该key）
+//                Boolean loginExist = redisUtil.hasKey(USER_LOGIN_KEY + userId);
+//                if (BooleanUtils.isFalse(loginExist)) {
+//                    return writeError(response, 401, "登录已失效，请重新登录");
+//                }
+        // 透传用户ID到下游微服务
+        ServerHttpRequest newReq = request.mutate()
+                .header(AuthConstant.AUTH_USER_ID_HEADER, userId.toString())
+                .build();
+        return newReq;
     }
 
     /**

@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.ym.common.dto.req.PageReq;
 import com.ym.common.result.Result;
 import com.ym.product.dto.resp.goods.spu.GoodsSpuResp;
-import com.ym.product.service.goods.client.IClientGoodsService;
+import com.ym.product.service.goods.client.IUserGoodsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,10 +18,10 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class GoodsController {
 
-    private final IClientGoodsService clientGoodsService;
+    private final IUserGoodsService userGoodsService;
 
     @GetMapping("/hot")
     public Result<IPage<GoodsSpuResp>> pageHotGoods(@ModelAttribute PageReq pageReq) {
-        return Result.success(clientGoodsService.pageHotGoods(pageReq));
+        return Result.success(userGoodsService.pageHotGoods(pageReq));
     }
 }

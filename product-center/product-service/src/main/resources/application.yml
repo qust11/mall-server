@@ -23,3 +23,9 @@ spring:
     feign:
       servlet:
         enabled: true
+logging:
+  level:
+    # 打印底层 HTTP 请求和响应（会包含完整的 DSL 语句）[reference:0][reference:1]
+    org.springframework.data.elasticsearch.client.WIRE: TRACE
+    # 或者更通用的 tracer 日志[reference:2]
+    tracer: TRACE
