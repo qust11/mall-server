@@ -9,7 +9,6 @@ import com.ym.product.dto.req.GoodsUpdateReq;
 import com.ym.product.dto.resp.goods.sku.GoodsSkuListResp;
 import com.ym.product.dto.resp.goods.spu.GoodsSpuDetailResp;
 import com.ym.product.dto.resp.goods.spu.GoodsSpuListResp;
-import com.ym.product.dto.resp.goods.spu.GoodsSpuResp;
 
 /**
  * @author qushutao

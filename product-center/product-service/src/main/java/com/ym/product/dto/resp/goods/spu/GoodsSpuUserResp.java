@@ -18,7 +18,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class GoodsSpuResp extends GoodsSpuCommonDto {
+public class GoodsSpuUserResp  extends GoodsSpuCommonDto {
 
 
     /**
@@ -31,13 +31,7 @@ public class GoodsSpuResp extends GoodsSpuCommonDto {
      */
     private String spuCode;
 
-
     private Long sales;
-
-    /**
-     * spu id
-     */
-    private Long id;
 
     /**
      * 副标题卖点
@@ -58,9 +52,4 @@ public class GoodsSpuResp extends GoodsSpuCommonDto {
      * 主图
      */
     private String mainImg;
-
-    /**
-     * sku id
-     */
-    private Long skuId;
 }

@@ -3,7 +3,8 @@ package com.ym.product.service.goods.client;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.ym.common.dto.req.PageReq;
-import com.ym.product.dto.resp.goods.spu.GoodsSpuResp;
+import com.ym.product.dto.resp.goods.spu.GoodsSpuUserDetailResp;
+import com.ym.product.dto.resp.goods.spu.GoodsSpuUserResp;
 
 /**
  * @author qushutao
@@ -12,6 +13,8 @@ import com.ym.product.dto.resp.goods.spu.GoodsSpuResp;
 public interface IUserGoodsService {
 
 
-    IPage<GoodsSpuResp> pageHotGoods(PageReq pageReq);
+    IPage<GoodsSpuUserResp> pageHotGoods(PageReq pageReq);
+
+    GoodsSpuUserDetailResp getSpuAndSkuDetailBySpuId(Long id);
 
 }

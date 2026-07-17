@@ -27,7 +27,7 @@ import java.time.LocalDateTime;
 public class GoodsSku implements Serializable {
 
     @Serial
-    private static final long serialVersionUID = 2816572787750075701L;
+    private static final long serialVersionUID = 7642626772995609936L;
 
     private Long id;
 

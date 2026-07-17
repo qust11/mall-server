@@ -1,5 +1,6 @@
 package com.ym.product.service.goods.core.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.ym.common.constant.ResultCodeEnum;
 import com.ym.common.exception.BusinessException;
@@ -15,6 +16,7 @@ import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -62,5 +64,13 @@ public class GoodsSkuServiceImpl extends ServiceImpl<GoodsSkuMapper, GoodsSku> i
                 lock.unlock();
             }
         }
+    }
+
+    @Override
+    public List<GoodsSku> listBySpuId(Long id) {
+        if (null == id) {
+            return new ArrayList<>();
+        }
+        return list(new LambdaQueryWrapper<GoodsSku>().eq(GoodsSku::getSpuId, id));
     }
 }

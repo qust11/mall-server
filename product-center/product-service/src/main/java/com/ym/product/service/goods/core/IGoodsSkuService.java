@@ -21,4 +21,6 @@ public interface IGoodsSkuService extends IService<GoodsSku> {
 
     void skuLockStock(GoodsSkuLockDto goodsSkuLockDto);
 
+    List<GoodsSku> listBySpuId(Long id);
+
 }
