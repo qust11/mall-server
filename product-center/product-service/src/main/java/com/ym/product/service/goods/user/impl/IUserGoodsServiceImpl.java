@@ -1,4 +1,4 @@
-package com.ym.product.service.goods.client.impl;
+package com.ym.product.service.goods.user.impl;
 
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -7,7 +7,6 @@ import com.ym.common.enums.YesNoEnums;
 import com.ym.common.util.PageUtil;
 import com.ym.product.converter.GoodsConverter;
 import com.ym.product.converter.GoodsSkuConverter;
-import com.ym.product.dto.resp.goods.sku.GoodsSkuDetailResp;
 import com.ym.product.dto.resp.goods.spu.GoodsSpuUserDetailResp;
 import com.ym.product.dto.resp.goods.spu.GoodsSpuUserResp;
 import com.ym.product.entity.elastic.GoodsSpuDoc;
@@ -15,7 +14,7 @@ import com.ym.product.entity.goods.GoodsSku;
 import com.ym.product.service.elastic.GoodsSpuEsService;
 import com.ym.product.service.goods.core.IGoodsSkuService;
 import com.ym.product.service.goods.core.IGoodsSpuService;
-import com.ym.product.service.goods.client.IUserGoodsService;
+import com.ym.product.service.goods.user.IUserGoodsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

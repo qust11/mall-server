@@ -28,5 +28,8 @@ public class CartBO implements Serializable {
     /**
      * 商品数量
      */
-    private Integer count;
+    private Integer quantity;
+
+
+    private Long spuId;
 }

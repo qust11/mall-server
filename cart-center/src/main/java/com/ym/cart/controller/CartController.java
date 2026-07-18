@@ -1,12 +1,16 @@
 package com.ym.cart.controller;
 
 
+import com.ym.cart.service.ICartService;
 import com.ym.common.bo.CartBO;
+import com.ym.common.bo.CartSkuDetailBO;
+import com.ym.common.result.Result;
 import com.ym.common.util.UserHolderUtil;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * @author qushutao
@@ -14,12 +18,20 @@ import org.springframework.web.bind.annotation.RestController;
  **/
 @RestController
 @RequestMapping("/cart")
+@RequiredArgsConstructor
 public class CartController {
 
+    private final ICartService cartService;
+
     @PostMapping("/add")
-    public String cartAdd(@RequestBody CartBO cartBO) {
-        Long l = UserHolderUtil.get();
-        System.out.println(l);
-        return "cart";
+    public Result<Void> addCart(@RequestBody CartBO cartBO) {
+        cartService.addCart(cartBO);
+        return Result.success();
+    }
+
+    @GetMapping("/sku-detail")
+    public Result<List<CartSkuDetailBO>> getCartSkuDetail() {
+
+        return Result.success(cartService.getCartSkuDetail());
     }
 }

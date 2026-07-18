@@ -1,6 +1,7 @@
 package com.ym.product.converter;
 
 
+import com.ym.common.bo.CartSkuDetailBO;
 import com.ym.product.dto.req.GoodsSkuReq;
 import com.ym.product.dto.resp.goods.sku.GoodsSkuDetailResp;
 import com.ym.product.dto.resp.goods.sku.GoodsSkuListResp;
@@ -30,4 +31,10 @@ public interface GoodsSkuConverter {
     GoodsSkuDetailResp toGoodsSkuDetailResp(GoodsSku goodsSku);
 
     List<GoodsSkuDetailResp> batchToGoodsSkuDetailResp(List<GoodsSku> goodsSkuList);
+
+    @Mapping(target = "skuId", source = "id")
+    CartSkuDetailBO toCartSkuDetailBO(GoodsSku goodsSku);
+
+    List<CartSkuDetailBO> batchToCartSkuDetailBO(List<GoodsSku> goodsSkus);
+
 }

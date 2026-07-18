@@ -6,7 +6,7 @@ import com.ym.common.dto.req.PageReq;
 import com.ym.common.result.Result;
 import com.ym.product.dto.resp.goods.spu.GoodsSpuUserDetailResp;
 import com.ym.product.dto.resp.goods.spu.GoodsSpuUserResp;
-import com.ym.product.service.goods.client.IUserGoodsService;
+import com.ym.product.service.goods.user.IUserGoodsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

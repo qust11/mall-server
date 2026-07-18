@@ -1,4 +1,4 @@
-package com.ym.product.service.goods.client;
+package com.ym.product.service.goods.user;
 
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
