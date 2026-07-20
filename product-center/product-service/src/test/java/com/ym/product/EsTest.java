@@ -70,7 +70,7 @@ public class EsTest {
 
 //            goodsSpuEsService.save(entity);
 
-            goodsSpuEsService.updatePart(entity);
+            goodsSpuEsService.save(entity);
         }
     }
 
