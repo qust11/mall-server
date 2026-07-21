@@ -1,4 +1,4 @@
-package com.ym.promotion.service;
+package com.ym.promotion.service.core;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.ym.common.dto.req.PageReq;

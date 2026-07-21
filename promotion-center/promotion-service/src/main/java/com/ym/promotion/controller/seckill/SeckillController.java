@@ -3,7 +3,7 @@ package com.ym.promotion.controller.seckill;
 import com.ym.common.result.Result;
 import com.ym.promotion.dto.req.SeckillReq;
 import com.ym.promotion.dto.resp.SeckillResp;
-import com.ym.promotion.service.ISeckillService;
+import com.ym.promotion.service.core.ISeckillService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

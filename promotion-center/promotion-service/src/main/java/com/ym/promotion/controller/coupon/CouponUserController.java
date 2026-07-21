@@ -1,7 +1,7 @@
 package com.ym.promotion.controller.coupon;
 
 import com.ym.common.result.Result;
-import com.ym.promotion.service.ICouponMemberService;
+import com.ym.promotion.service.core.ICouponMemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

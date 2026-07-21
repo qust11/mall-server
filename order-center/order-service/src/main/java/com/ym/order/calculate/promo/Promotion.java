@@ -2,6 +2,8 @@ package com.ym.order.calculate.promo;
 
 
 import com.ym.order.bo.OrderBO;
+import com.ym.order.constant.OrderPromotionEnum;
+import com.ym.promotion.dto.PromotionDetailDto;
 
 /**
  *
@@ -10,7 +12,9 @@ import com.ym.order.bo.OrderBO;
  **/
 public interface Promotion {
 
-    void apply(OrderBO order);
+    void apply(OrderBO order, PromotionDetailDto promotionDetailDto);
 
     int getSort();
+
+    OrderPromotionEnum getPromotionEnum();
 }

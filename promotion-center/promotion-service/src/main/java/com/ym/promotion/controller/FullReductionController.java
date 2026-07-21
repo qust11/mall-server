@@ -3,7 +3,7 @@ package com.ym.promotion.controller;
 import com.ym.common.result.Result;
 import com.ym.promotion.dto.req.FullReductionReq;
 import com.ym.promotion.dto.resp.FullReductionResp;
-import com.ym.promotion.service.IFullReductionService;
+import com.ym.promotion.service.core.IFullReductionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

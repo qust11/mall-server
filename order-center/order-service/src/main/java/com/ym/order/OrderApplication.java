@@ -21,7 +21,7 @@ import org.springframework.context.annotation.ComponentScans;
 @EnableDiscoveryClient
 @ComponentScans( value = {@ComponentScan("com.ym.order"), @ComponentScan("com.ym.common")})
 @ServletComponentScan // 关键注解，扫描@WebFilter、@WebServlet
-@EnableFeignClients(basePackages = "com.ym.product.api")
+@EnableFeignClients(basePackages = {"com.ym.product.api", "com.ym.promotion.api"})
 public class OrderApplication {
     public static void main(String[] args) {
         SpringApplication.run(OrderApplication.class, args);

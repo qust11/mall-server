@@ -1,18 +1,22 @@
-package com.ym.promotion.service.impl;
+package com.ym.promotion.service.core.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.ym.common.constant.ResultCodeEnum;
 import com.ym.common.exception.BusinessException;
+import com.ym.common.util.UserHolderUtil;
 import com.ym.promotion.converter.CouponConverter;
+import com.ym.promotion.dto.CouponDto;
 import com.ym.promotion.dto.PromotionBaseDto;
+import com.ym.promotion.dto.PromotionDetailDto;
 import com.ym.promotion.dto.req.CouponReq;
 import com.ym.promotion.dto.resp.CouponResp;
 import com.ym.promotion.entity.Coupon;
 import com.ym.promotion.entity.Promotion;
 import com.ym.promotion.mapper.CouponMapper;
-import com.ym.promotion.service.ICouponService;
+import com.ym.promotion.service.core.ICouponService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.ym.promotion.service.IPromotionService;
+import com.ym.promotion.service.core.IPromotionService;
+import com.ym.promotion.service.user.ClientPromotionService;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -20,6 +24,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -32,12 +37,13 @@ import java.util.Optional;
  */
 @Service
 @RequiredArgsConstructor
-public class CouponServiceImpl extends ServiceImpl<CouponMapper, Coupon> implements ICouponService {
+public class CouponServiceImpl extends ServiceImpl<CouponMapper, Coupon> implements ICouponService, ClientPromotionService {
 
     private final IPromotionService promotionService;
+
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public <T extends PromotionBaseDto> Long savePromotionInfo( T promotionBaseDto) {
+    public <T extends PromotionBaseDto> Long savePromotionInfo(T promotionBaseDto) {
         Long promotionId = promotionService.savePromotion(promotionBaseDto);
         CouponReq couponReq = (CouponReq) promotionBaseDto;
         Coupon coupon = getCoupon(couponReq);
@@ -69,10 +75,10 @@ public class CouponServiceImpl extends ServiceImpl<CouponMapper, Coupon> impleme
 
     private static Coupon getCoupon(CouponReq couponReq) {
         Coupon coupon = CouponConverter.INSTANCE.toCoupon(couponReq);
-        if (CollectionUtils.isNotEmpty(couponReq.getSpuIds())){
+        if (CollectionUtils.isNotEmpty(couponReq.getSpuIds())) {
             coupon.setSpuIds(StringUtils.join(couponReq.getSpuIds(), ","));
         }
-        if (CollectionUtils.isNotEmpty(couponReq.getCategoryIds())){
+        if (CollectionUtils.isNotEmpty(couponReq.getCategoryIds())) {
             coupon.setCategoryIds(StringUtils.join(couponReq.getCategoryIds(), ","));
         }
         return coupon;
@@ -86,5 +92,12 @@ public class CouponServiceImpl extends ServiceImpl<CouponMapper, Coupon> impleme
         couponResp.setSpuIds(StringUtils.isNotBlank(coupon.getSpuIds()) ? Arrays.stream(coupon.getSpuIds().split(",")).map(Long::valueOf).toList() : null);
         couponResp.setCategoryIds(StringUtils.isNotBlank(coupon.getCategoryIds()) ? Arrays.stream(coupon.getCategoryIds().split(",")).map(Long::valueOf).toList() : null);
         return couponResp;
+    }
+
+    @Override
+    public void getPromotionByUser(PromotionDetailDto promotionDetailDto, List<Long> skuIds) {
+        Long userId = UserHolderUtil.get();
+        List<CouponDto> couponList = baseMapper.getCouponByUser(userId, skuIds);
+        promotionDetailDto.setCouponList(couponList);
     }
 }

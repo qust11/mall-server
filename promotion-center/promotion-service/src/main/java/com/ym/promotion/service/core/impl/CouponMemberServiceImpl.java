@@ -1,4 +1,4 @@
-package com.ym.promotion.service.impl;
+package com.ym.promotion.service.core.impl;
 
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.ym.common.constant.NumberConstan;
@@ -11,10 +11,10 @@ import com.ym.promotion.entity.Coupon;
 import com.ym.promotion.entity.CouponMember;
 import com.ym.promotion.entity.Promotion;
 import com.ym.promotion.mapper.CouponMemberMapper;
-import com.ym.promotion.service.ICouponMemberService;
+import com.ym.promotion.service.core.ICouponMemberService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.ym.promotion.service.ICouponService;
-import com.ym.promotion.service.IPromotionService;
+import com.ym.promotion.service.core.ICouponService;
+import com.ym.promotion.service.core.IPromotionService;
 import lombok.RequiredArgsConstructor;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;

@@ -1,4 +1,4 @@
-package com.ym.promotion.service.impl;
+package com.ym.promotion.service.core.impl;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -11,7 +11,7 @@ import com.ym.promotion.dto.PromotionBaseDto;
 import com.ym.promotion.dto.resp.PromotionListResp;
 import com.ym.promotion.entity.Promotion;
 import com.ym.promotion.mapper.PromotionMapper;
-import com.ym.promotion.service.IPromotionService;
+import com.ym.promotion.service.core.IPromotionService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.collections4.CollectionUtils;

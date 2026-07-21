@@ -1,7 +1,6 @@
 package com.ym.product.api;
 
 
-import com.ym.common.bo.CartBO;
 import com.ym.common.bo.CartSkuDetailBO;
 import com.ym.common.result.Result;
 import com.ym.product.dto.GoodsSkuLockDto;

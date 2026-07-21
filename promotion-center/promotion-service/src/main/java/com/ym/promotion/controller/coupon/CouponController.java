@@ -3,7 +3,7 @@ package com.ym.promotion.controller.coupon;
 import com.ym.common.result.Result;
 import com.ym.promotion.dto.req.CouponReq;
 import com.ym.promotion.dto.resp.CouponResp;
-import com.ym.promotion.service.ICouponService;
+import com.ym.promotion.service.core.ICouponService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

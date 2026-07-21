@@ -2,4 +2,20 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ym.promotion.mapper.CouponMapper">
 
+    <select id="getCouponByUser" resultType="com.ym.promotion.dto.CouponDto">
+        SELECT c.*
+        FROM coupon_member cm
+        INNER JOIN coupon c ON cm.coupon_id = c.id
+        INNER JOIN coupon_spu cs ON c.id = cs.coupon_id
+        <where> cm.user_id = 1
+            <if test="skuIds != null and skuIds.size() > 0">
+                AND cs.spu_id IN
+                <foreach collection="skuIds" open="(" close=")" separator=",">
+                    #{item}
+                </foreach>
+            </if>
+          AND cm.`status` = 2
+          AND cm.expire_time > NOW()
+        </where>
+    </select>
 </mapper>

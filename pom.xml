@@ -21,8 +21,6 @@
         <module>pay-center</module>
         <module>product-center</module>
         <module>mall-common</module>
-        <module>cart-center</module>
-        <module>cart-center</module>
         <module>promotion-center</module>
         <module>promotion-center/promotion-api</module>
         <module>promotion-center/promotion-service</module>

@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.ym.common.dto.req.PageReq;
 import com.ym.common.result.Result;
 import com.ym.promotion.dto.resp.PromotionListResp;
-import com.ym.promotion.service.IPromotionService;
+import com.ym.promotion.service.core.IPromotionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

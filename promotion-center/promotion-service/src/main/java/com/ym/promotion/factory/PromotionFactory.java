@@ -2,7 +2,7 @@ package com.ym.promotion.factory;
 
 
 import com.ym.common.enums.PromotionTypeEnum;
-import com.ym.promotion.service.IPromotionCommonService;
+import com.ym.promotion.service.core.IPromotionCommonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

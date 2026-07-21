@@ -11,12 +11,17 @@ import java.time.LocalDateTime;
 
 /**
  * @author qushutao
- * @since 2026-07-04 22:48
+ * @since 2026-07-12 16:42
  **/
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class PromotionBaseDto {
+public class FullReductionDto {
+
+    /**
+     * id
+     */
+    private Long id;
 
     /**
      * 活动名称
@@ -52,4 +57,29 @@ public class PromotionBaseDto {
      */
     @ApiModelProperty("活动说明")
     private String promotionDesc;
+
+    /**
+     * 折扣类型 1:满减 2:满折
+     */
+    @ApiModelProperty("折扣类型 1:满减 2:满折")
+    private Integer discountType;
+
+    /**
+     * 满足金额
+     */
+    @ApiModelProperty("满足金额")
+    private Long useThreshold;
+
+    /**
+     * 减免金额
+     */
+    @ApiModelProperty("减免金额")
+    private Long reduceAmount;
+
+    /**
+     *折扣
+     */
+    @ApiModelProperty("折扣值")
+    private Long discountRate;
+
 }

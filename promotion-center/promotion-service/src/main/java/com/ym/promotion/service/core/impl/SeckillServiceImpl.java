@@ -1,7 +1,8 @@
-package com.ym.promotion.service.impl;
+package com.ym.promotion.service.core.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.ym.common.constant.ResultCodeEnum;
+import com.ym.common.enums.PromotionTypeEnum;
 import com.ym.common.exception.BusinessException;
 import com.ym.common.result.Result;
 import com.ym.product.api.GoodSkuClient;
@@ -9,20 +10,26 @@ import com.ym.product.dto.GoodsSkuLockDto;
 import com.ym.promotion.constant.PromotionRedisConstant;
 import com.ym.promotion.converter.SeckillConverter;
 import com.ym.promotion.dto.PromotionBaseDto;
+import com.ym.promotion.dto.PromotionDetailDto;
+import com.ym.promotion.dto.SeckillDto;
 import com.ym.promotion.dto.req.SeckillReq;
 import com.ym.promotion.dto.resp.SeckillResp;
 import com.ym.promotion.entity.Promotion;
 import com.ym.promotion.entity.Seckill;
 import com.ym.promotion.mapper.SeckillMapper;
-import com.ym.promotion.service.IPromotionService;
-import com.ym.promotion.service.ISeckillService;
+import com.ym.promotion.service.core.IPromotionService;
+import com.ym.promotion.service.core.ISeckillService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.ym.promotion.service.user.ClientPromotionService;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.collections4.CollectionUtils;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
@@ -36,7 +43,7 @@ import java.util.concurrent.TimeUnit;
  */
 @Service
 @RequiredArgsConstructor
-public class SeckillServiceImpl extends ServiceImpl<SeckillMapper, Seckill> implements ISeckillService {
+public class SeckillServiceImpl extends ServiceImpl<SeckillMapper, Seckill> implements ISeckillService , ClientPromotionService {
 
     private final IPromotionService promotionService;
 
@@ -106,5 +113,19 @@ public class SeckillServiceImpl extends ServiceImpl<SeckillMapper, Seckill> impl
         Promotion promotion = Optional.ofNullable(promotionService.getById(promotionId)).orElseThrow(() -> new BusinessException(ResultCodeEnum.ACTIVITY_NOT_EXIST));
         Seckill seckill = this.getOne(new LambdaQueryWrapper<Seckill>().eq(Seckill::getPromotionId, promotionId));
         return SeckillConverter.INSTANCE.toSeckillResp(promotion, seckill);
+    }
+
+    @Override
+    public void getPromotionByUser(PromotionDetailDto promotionDetailDto, List<Long> skuIds) {
+        LocalDateTime now = LocalDateTime.now();
+        List<Promotion> promotions = promotionService.list(new LambdaQueryWrapper<Promotion>().eq(Promotion::getPromotionType, PromotionTypeEnum.SECKILL)
+                .le(Promotion::getStartTime, now).ge(Promotion::getEndTime, now));
+        if (CollectionUtils.isEmpty(promotions)){
+            return;
+        }
+        List<Long> promotionIds = promotions.stream().map(Promotion::getId).toList();
+        List<Seckill> seckills = list(new LambdaQueryWrapper<Seckill>().eq(Seckill::getPromotionId, promotionIds));
+        List<SeckillDto> seckillList = SeckillConverter.INSTANCE.batchToSeckillDto(seckills);
+        promotionDetailDto.setSeckillList(seckillList);
     }
 }

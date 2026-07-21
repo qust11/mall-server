@@ -1,4 +1,4 @@
-package com.ym.promotion.service;
+package com.ym.promotion.service.core;
 
 import com.ym.promotion.dto.resp.CouponResp;
 import com.ym.promotion.entity.Coupon;

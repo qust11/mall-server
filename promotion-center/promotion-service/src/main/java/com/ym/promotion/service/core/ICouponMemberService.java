@@ -1,4 +1,4 @@
-package com.ym.promotion.service;
+package com.ym.promotion.service.core;
 
 import com.ym.promotion.entity.CouponMember;
 import com.baomidou.mybatisplus.extension.service.IService;

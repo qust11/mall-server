@@ -53,6 +53,13 @@ public class CartSkuDetailBO implements Serializable {
     @ApiModelProperty("价格 单位:分")
     private Long price;
 
+    @ApiModelProperty("优惠价格")
+    private Long discountPrice;
+
+    /** Selected quantity in the current user's cart. */
+    @ApiModelProperty("购物车数量")
+    private Integer quantity;
+
     /**
      * 总库存
      */
