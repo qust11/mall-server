@@ -1,4 +1,4 @@
-package com.ym.common.bo;
+package com.ym.order.dto;
 
 
 import io.swagger.annotations.ApiModelProperty;
@@ -6,20 +6,17 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.io.Serial;
-import java.io.Serializable;
+import java.util.List;
 
 /**
+ *
  * @author qushutao
- * @since 2026-07-01 22:18
+ * @since 2026-07-21 9:33
  **/
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
-public class CartSkuDetailBO implements Serializable {
-
-    @Serial
-    private static final long serialVersionUID = -1339349629017956048L;
+public class CartItemListResp {
 
     /**
      * 商品skuId
@@ -76,5 +73,9 @@ public class CartSkuDetailBO implements Serializable {
      */
     @ApiModelProperty("锁单库存")
     private Integer lockStock;
-
+    
+    /**
+     * 商品使用的优惠信息
+     */
+    private List<CartItemPromotionResp> promotionRespList;
 }

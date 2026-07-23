@@ -40,4 +40,15 @@
             spu_id = #{spuId}
         </where>
     </select>
+    <select id="listCartSkuDetail" resultType="com.ym.common.bo.CartSkuDetailBO">
+        SELECT sk.*,sp.category_id
+        FROM goods_sku sk
+        INNER JOIN goods_spu sp on sk.spu_id = sp.id
+        <where>
+        sk.id IN
+            <foreach item="item" collection="skuIds" separator="," open="(" close=")" index="">
+                #{item}
+            </foreach>
+        </where>
+    </select>
 </mapper>

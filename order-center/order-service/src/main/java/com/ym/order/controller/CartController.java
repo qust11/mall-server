@@ -29,7 +29,6 @@ public class CartController {
 
     @GetMapping("/sku-detail")
     public Result<List<CartSkuDetailBO>> getCartSkuDetail() {
-
         return Result.success(cartService.getCartSkuDetail());
     }
 }

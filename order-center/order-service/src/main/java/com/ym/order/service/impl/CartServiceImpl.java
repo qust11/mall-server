@@ -12,6 +12,8 @@ import com.ym.common.util.UserHolderUtil;
 import com.ym.order.constant.OrderRedisConstant;
 import com.ym.order.service.ICartService;
 import com.ym.product.api.GoodSkuClient;
+import com.ym.promotion.api.PromotionApi;
+import com.ym.promotion.dto.PromotionDetailDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -28,6 +30,7 @@ public class CartServiceImpl implements ICartService {
 
     private final RedisUtil redisUtil;
     private final GoodSkuClient goodSkuClient;
+    private final PromotionApi promotionApi;
 
     @Override
     public void addCart(CartBO cartBO) {
@@ -53,6 +56,8 @@ public class CartServiceImpl implements ICartService {
         List<CartBO> cartBOList = redisUtil.getHashAllMember(redisKey, CartBO.class);
         List<Long> skuIds = cartBOList.stream().map(CartBO::getSkuId).toList();
         Result<List<CartSkuDetailBO>> skuResult = goodSkuClient.getSkuInfo(skuIds);
+        PromotionDetailDto userAllPromotion = promotionApi.getUserAllPromotion(skuIds);
+
         if (!ResultCodeEnum.SUCCESS.getCode().equals(skuResult.getCode())) {
             throw new BusinessException(ResultCodeEnum.CART_NOT_EXIST, skuResult.getMsg());
         }

@@ -54,11 +54,11 @@ public class OrderBO {
         private Long spuId;           // SPU ID（用于多件多折分组）
         private BigDecimal weight;    // 重量(kg)，用于运费计算
 
-        private Long finalPrice;
+        private long finalPrice;
         /**
          * 折扣金额 比如满减优惠
          */
-        private Long discountPrice;
+        private long discountPrice;
     }
 }
 

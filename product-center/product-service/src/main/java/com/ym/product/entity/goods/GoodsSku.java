@@ -107,6 +107,9 @@ public class GoodsSku implements Serializable {
     @ApiModelProperty("0不可售 1正常")
     private Integer status;
 
+    @ApiModelProperty("类目id")
+    private Long categoryId;
+
     /**
      * 创建时间
      */

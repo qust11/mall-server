@@ -1,5 +1,6 @@
 package com.ym.product.service.goods.core;
 
+import com.ym.common.bo.CartSkuDetailBO;
 import com.ym.product.bo.goods.GoodsNumBO;
 import com.ym.product.dto.GoodsSkuLockDto;
 import com.ym.product.entity.goods.GoodsSku;
@@ -23,4 +24,5 @@ public interface IGoodsSkuService extends IService<GoodsSku> {
 
     List<GoodsSku> listBySpuId(Long id);
 
+    List<CartSkuDetailBO> listCartSkuDetail(List<Long> skuIds);
 }

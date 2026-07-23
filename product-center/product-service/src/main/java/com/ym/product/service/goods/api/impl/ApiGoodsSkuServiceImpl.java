@@ -63,7 +63,8 @@ public class ApiGoodsSkuServiceImpl implements IApiGoodsSkuService {
 
     @Override
     public List<CartSkuDetailBO> getSkuInfo(List<Long> skuIds) {
-        List<GoodsSku> goodsSkus = goodsSkuService.listByIds(skuIds);
-        return GoodsSkuConverter.INSTANCE.batchToCartSkuDetailBO(goodsSkus);
+        List<CartSkuDetailBO> goodsSkus = goodsSkuService.listCartSkuDetail(skuIds);
+        // 获取sku对应的categoryId
+        return goodsSkus;
     }
 }

@@ -2,6 +2,7 @@ package com.ym.product.service.goods.core.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
+import com.ym.common.bo.CartSkuDetailBO;
 import com.ym.common.constant.ResultCodeEnum;
 import com.ym.common.exception.BusinessException;
 import com.ym.product.bo.goods.GoodsNumBO;
@@ -72,5 +73,10 @@ public class GoodsSkuServiceImpl extends ServiceImpl<GoodsSkuMapper, GoodsSku> i
             return new ArrayList<>();
         }
         return list(new LambdaQueryWrapper<GoodsSku>().eq(GoodsSku::getSpuId, id));
+    }
+
+    @Override
+    public List<CartSkuDetailBO> listCartSkuDetail(List<Long> skuIds) {
+        return baseMapper.listCartSkuDetail(skuIds);
     }
 }
