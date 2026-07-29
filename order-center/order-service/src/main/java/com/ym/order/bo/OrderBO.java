@@ -40,7 +40,7 @@ public class OrderBO {
     @AllArgsConstructor
     @NoArgsConstructor
     @Data
-    public class OrderSkuBO {
+    public static class OrderSkuBO {
 
         private Long price; // 当前单价
 

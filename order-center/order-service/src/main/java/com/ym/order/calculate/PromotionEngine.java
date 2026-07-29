@@ -30,7 +30,7 @@ public class PromotionEngine {
         List<Long> skuIds = order.getItemList().stream().map(c->c.getSkuId()).toList();
         PromotionDetailDto promotionDetailDto = promotionApi.getUserAllPromotion(order.getItemList().stream().map(OrderBO.OrderSkuBO::getSkuId).collect(Collectors.toList()));
         for (Promotion promotionProcess : promotions) {
-            promotionProcess.apply(order);
+            promotionProcess.apply(order,promotionDetailDto);
         }
         promotions.sort(Comparator.comparingInt(Promotion::getSort));
         // 顺序应用

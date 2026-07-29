@@ -5,7 +5,6 @@ import com.ym.common.bo.CartSkuDetailBO;
 import com.ym.common.constant.ResultCodeEnum;
 import com.ym.common.exception.BusinessException;
 import com.ym.product.constant.GoodsRedisConstant;
-import com.ym.product.converter.GoodsSkuConverter;
 import com.ym.product.dto.GoodsSkuLockDto;
 import com.ym.product.entity.goods.GoodsSku;
 import com.ym.product.service.goods.api.IApiGoodsSkuService;
@@ -63,8 +62,7 @@ public class ApiGoodsSkuServiceImpl implements IApiGoodsSkuService {
 
     @Override
     public List<CartSkuDetailBO> getSkuInfo(List<Long> skuIds) {
-        List<CartSkuDetailBO> goodsSkus = goodsSkuService.listCartSkuDetail(skuIds);
         // 获取sku对应的categoryId
-        return goodsSkus;
+        return goodsSkuService.listCartSkuDetail(skuIds);
     }
 }

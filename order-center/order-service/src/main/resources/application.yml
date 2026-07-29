@@ -5,10 +5,12 @@ spring:
     name: order-service
   config:
     import:
-      - nacos:mall-order?group=DEFAULT_GROUP
+      - optional:nacos:mall-order?group=DEFAULT_GROUP
   cloud:
     nacos:
-      server-addr: 127.0.0.1:8848
+      server-addr: 192.168.5.180:8848
+      username: nacos
+      password: nacos
       config:
         namespace: 5cfb9e33-bd54-4203-989b-a09c9e604a25
         access-key: VGhpc0lzTXlDdXN0b21TZWNyZXRLZXkwMTIzNDU2Nzg=

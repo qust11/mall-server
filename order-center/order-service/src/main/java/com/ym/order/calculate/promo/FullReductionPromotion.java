@@ -19,7 +19,6 @@ import java.util.stream.Collectors;
  * @since 2026-07-20 10:27
  **/
 @AllArgsConstructor
-@NoArgsConstructor
 public class FullReductionPromotion implements Promotion{
 
     @Override

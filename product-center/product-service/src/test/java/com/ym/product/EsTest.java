@@ -4,7 +4,6 @@ import com.ym.common.dto.req.PageReq;
 import com.ym.product.bo.goods.GoodsNumBO;
 import com.ym.product.entity.elastic.GoodsSpuDoc;
 import com.ym.product.entity.goods.GoodsSpu;
-import com.ym.product.repository.GoodsSpuRepository;
 import com.ym.product.service.elastic.GoodsSpuEsService;
 import com.ym.product.service.goods.core.IGoodsBrandService;
 import com.ym.product.service.goods.core.IGoodsCategoryService;
@@ -13,9 +12,6 @@ import com.ym.product.service.goods.core.IGoodsSpuService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 
 import java.io.IOException;
 import java.util.List;

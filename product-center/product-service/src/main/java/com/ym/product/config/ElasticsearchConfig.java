@@ -14,7 +14,7 @@ import org.springframework.data.elasticsearch.client.elc.ElasticsearchConfigurat
 @Configuration
 public class ElasticsearchConfig extends ElasticsearchConfiguration {
 
-    @Value("${spring.elasticsearch.uris:http://localhost:9200}")
+    @Value("${spring.elasticsearch.uris:192.168.5.180:9200}")
     private String elasticsearchUris;
     @Value("${spring.elasticsearch.username:elastic}")
     private String username;
