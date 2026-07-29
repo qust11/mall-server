@@ -2,6 +2,7 @@ package com.ym.product.service.goods.core.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
+import com.ym.common.bo.CartSkuBO;
 import com.ym.common.bo.CartSkuDetailBO;
 import com.ym.common.constant.ResultCodeEnum;
 import com.ym.common.exception.BusinessException;
@@ -76,7 +77,7 @@ public class GoodsSkuServiceImpl extends ServiceImpl<GoodsSkuMapper, GoodsSku> i
     }
 
     @Override
-    public List<CartSkuDetailBO> listCartSkuDetail(List<Long> skuIds) {
+    public List<CartSkuBO> listCartSkuDetail(List<Long> skuIds) {
         return baseMapper.listCartSkuDetail(skuIds);
     }
 }

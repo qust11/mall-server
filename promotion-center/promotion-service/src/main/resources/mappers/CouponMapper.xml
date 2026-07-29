@@ -7,10 +7,10 @@
         FROM coupon_member cm
         INNER JOIN coupon c ON cm.coupon_id = c.id
         INNER JOIN coupon_spu cs ON c.id = cs.coupon_id
-        <where> cm.user_id = 1
+        <where> cm.user_id = #{userId}
             <if test="skuIds != null and skuIds.size() > 0">
                 AND cs.spu_id IN
-                <foreach collection="skuIds" open="(" close=")" separator=",">
+                <foreach collection="skuIds" open="(" close=")" separator="," item="item">
                     #{item}
                 </foreach>
             </if>

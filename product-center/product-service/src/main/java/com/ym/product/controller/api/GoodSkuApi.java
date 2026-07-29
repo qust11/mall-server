@@ -1,6 +1,7 @@
 package com.ym.product.controller.api;
 
 
+import com.ym.common.bo.CartSkuBO;
 import com.ym.common.bo.CartSkuDetailBO;
 import com.ym.common.result.Result;
 import com.ym.product.api.GoodSkuClient;
@@ -34,7 +35,7 @@ public class GoodSkuApi implements GoodSkuClient {
 
     @Override
     @GetMapping
-    public Result<List<CartSkuDetailBO>> getSkuInfo(List<Long> skuIds) {
+    public Result<List<CartSkuBO>> getSkuInfo(List<Long> skuIds) {
         return Result.success(apiGoodsSkuService.getSkuInfo(skuIds));
     }
 }

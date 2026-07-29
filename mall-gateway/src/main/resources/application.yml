@@ -50,6 +50,8 @@ spring:
               uri: lb://order-service
               predicates:
                 - Path=/order-service/**
+              filters:
+                - StripPrefix=1
             - id: payRoute
               uri: lb://pay-service
               predicates:

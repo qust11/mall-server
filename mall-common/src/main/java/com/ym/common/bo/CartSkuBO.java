@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serial;
 import java.io.Serializable;
-import java.util.List;
 
 /**
  * @author qushutao
@@ -17,7 +16,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class CartSkuDetailBO implements Serializable {
+public class CartSkuBO implements Serializable {
 
     @Serial
     private static final long serialVersionUID = -1339349629017956048L;
@@ -51,22 +50,7 @@ public class CartSkuDetailBO implements Serializable {
      * 价格 单位:分
      */
     @ApiModelProperty("价格 单位:分")
-    private Long totalPrice;
-
-
-    /**
-     * 最终价格 单位:分
-     */
-    @ApiModelProperty("最终价格 单位:分")
-    private Long finalPrice;
-
-    @ApiModelProperty("优惠价格")
-    private Long discountPrice;
-
-    /** Selected quantity in the current user's cart. */
-    @ApiModelProperty("购物车数量")
-    private Integer quantity;
-
+    private Long price;
     /**
      * 总库存
      */
@@ -85,7 +69,9 @@ public class CartSkuDetailBO implements Serializable {
     @ApiModelProperty("锁单库存")
     private Integer lockStock;
 
-
-    @ApiModelProperty("优惠信息")
-    private List<Object> discountInfo;
+    /**
+     * 所属分类ID
+     */
+    @ApiModelProperty("所属分类ID")
+    private Long categoryId;
 }

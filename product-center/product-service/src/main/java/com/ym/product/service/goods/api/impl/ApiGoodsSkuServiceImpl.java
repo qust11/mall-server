@@ -1,6 +1,7 @@
 package com.ym.product.service.goods.api.impl;
 
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
+import com.ym.common.bo.CartSkuBO;
 import com.ym.common.bo.CartSkuDetailBO;
 import com.ym.common.constant.ResultCodeEnum;
 import com.ym.common.exception.BusinessException;
@@ -61,7 +62,7 @@ public class ApiGoodsSkuServiceImpl implements IApiGoodsSkuService {
     }
 
     @Override
-    public List<CartSkuDetailBO> getSkuInfo(List<Long> skuIds) {
+    public List<CartSkuBO> getSkuInfo(List<Long> skuIds) {
         // 获取sku对应的categoryId
         return goodsSkuService.listCartSkuDetail(skuIds);
     }

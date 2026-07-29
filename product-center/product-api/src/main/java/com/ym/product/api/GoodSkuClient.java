@@ -1,6 +1,7 @@
 package com.ym.product.api;
 
 
+import com.ym.common.bo.CartSkuBO;
 import com.ym.common.bo.CartSkuDetailBO;
 import com.ym.common.result.Result;
 import com.ym.product.dto.GoodsSkuLockDto;
@@ -25,5 +26,5 @@ public interface GoodSkuClient {
 
     // 路径、请求方式、参数必须和服务端对外API完全一致
     @GetMapping("/api/goods/sku")
-    Result<List<CartSkuDetailBO>> getSkuInfo(@RequestParam List<Long> skuIds);
+    Result<List<CartSkuBO>> getSkuInfo(@RequestParam List<Long> skuIds);
 }

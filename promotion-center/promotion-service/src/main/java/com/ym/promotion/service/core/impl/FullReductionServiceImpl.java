@@ -80,13 +80,13 @@ public class FullReductionServiceImpl extends ServiceImpl<FullReductionMapper, F
     @Override
     public void getPromotionByUser(PromotionDetailDto promotionDetailDto, List<Long> skuIds) {
         LocalDateTime now = LocalDateTime.now();
-        List<Promotion> promotions = promotionService.list(new LambdaQueryWrapper<Promotion>().eq(Promotion::getPromotionType, PromotionTypeEnum.SECKILL)
+        List<Promotion> promotions = promotionService.list(new LambdaQueryWrapper<Promotion>().eq(Promotion::getPromotionType, PromotionTypeEnum.FULL_DISCOUNT.getCode())
                 .le(Promotion::getStartTime, now).ge(Promotion::getEndTime, now));
         if (CollectionUtils.isEmpty(promotions)){
             return;
         }
         List<Long> promotionIds = promotions.stream().map(Promotion::getId).toList();
-        List<FullReduction> fullReductions = list(new LambdaQueryWrapper<FullReduction>().eq(FullReduction::getPromotionId, promotionIds));
+        List<FullReduction> fullReductions = list(new LambdaQueryWrapper<FullReduction>().in(FullReduction::getPromotionId, promotionIds));
         List<FullReductionDto> fullReductionList = FullReductionConverter.INSTANCE.batchToFullReductionDto(fullReductions);
         promotionDetailDto.setFullReductionList(fullReductionList);
     }

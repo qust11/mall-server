@@ -3,6 +3,7 @@ package com.ym.promotion.api;
 
 import com.ym.promotion.dto.PromotionDetailDto;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -17,6 +18,6 @@ import java.util.List;
 public interface PromotionApi {
 
 
-    @PutMapping("/api/promotion/all")
+    @GetMapping("/api/promotion/all")
     PromotionDetailDto getUserAllPromotion(@RequestParam List<Long> skuIds);
 }

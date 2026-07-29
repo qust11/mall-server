@@ -1,6 +1,7 @@
 package com.ym.product.mapper.goods;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.ym.common.bo.CartSkuBO;
 import com.ym.common.bo.CartSkuDetailBO;
 import com.ym.product.bo.goods.GoodsNumBO;
 import com.ym.product.bo.goods.GoodsPriceBO;
@@ -22,5 +23,5 @@ public interface GoodsSkuMapper extends BaseMapper<GoodsSku> {
 
     GoodsPriceBO getSpuRangePrice(Long spuId);
 
-    List<CartSkuDetailBO> listCartSkuDetail(List<Long> skuIds);
+    List<CartSkuBO> listCartSkuDetail(List<Long> skuIds);
 }

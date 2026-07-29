@@ -7,6 +7,7 @@ import com.ym.promotion.dto.FullReductionDto;
 import com.ym.promotion.dto.PromotionDetailDto;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.Comparator;
@@ -19,6 +20,7 @@ import java.util.stream.Collectors;
  * @since 2026-07-20 10:27
  **/
 @AllArgsConstructor
+@Service
 public class FullReductionPromotion implements Promotion{
 
     @Override

@@ -118,13 +118,13 @@ public class SeckillServiceImpl extends ServiceImpl<SeckillMapper, Seckill> impl
     @Override
     public void getPromotionByUser(PromotionDetailDto promotionDetailDto, List<Long> skuIds) {
         LocalDateTime now = LocalDateTime.now();
-        List<Promotion> promotions = promotionService.list(new LambdaQueryWrapper<Promotion>().eq(Promotion::getPromotionType, PromotionTypeEnum.SECKILL)
+        List<Promotion> promotions = promotionService.list(new LambdaQueryWrapper<Promotion>().eq(Promotion::getPromotionType, PromotionTypeEnum.SECKILL.getCode())
                 .le(Promotion::getStartTime, now).ge(Promotion::getEndTime, now));
         if (CollectionUtils.isEmpty(promotions)){
             return;
         }
         List<Long> promotionIds = promotions.stream().map(Promotion::getId).toList();
-        List<Seckill> seckills = list(new LambdaQueryWrapper<Seckill>().eq(Seckill::getPromotionId, promotionIds));
+        List<Seckill> seckills = list(new LambdaQueryWrapper<Seckill>().in(Seckill::getPromotionId, promotionIds));
         List<SeckillDto> seckillList = SeckillConverter.INSTANCE.batchToSeckillDto(seckills);
         promotionDetailDto.setSeckillList(seckillList);
     }

@@ -7,8 +7,8 @@ import com.ym.order.constant.OrderPromotionEnum;
 import com.ym.promotion.dto.CouponDto;
 import com.ym.promotion.dto.PromotionDetailDto;
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import org.apache.commons.collections4.CollectionUtils;
+import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -26,6 +26,7 @@ import java.util.stream.Collectors;
  * @since 2026-07-20 10:27
  **/
 @AllArgsConstructor
+@Service
 public class CouponPromotion implements Promotion {
 
     @Override
@@ -97,7 +98,7 @@ public class CouponPromotion implements Promotion {
 
     @Override
     public int getSort() {
-        return 0;
+        return 2;
     }
 
     @Override

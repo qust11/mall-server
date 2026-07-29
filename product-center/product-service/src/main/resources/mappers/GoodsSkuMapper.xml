@@ -40,8 +40,8 @@
             spu_id = #{spuId}
         </where>
     </select>
-    <select id="listCartSkuDetail" resultType="com.ym.common.bo.CartSkuDetailBO">
-        SELECT sk.*,sp.category_id
+    <select id="listCartSkuDetail" resultType="com.ym.common.bo.CartSkuBO">
+        SELECT sk.*,sk.id as skuId,sp.category_id
         FROM goods_sku sk
         INNER JOIN goods_spu sp on sk.spu_id = sp.id
         <where>

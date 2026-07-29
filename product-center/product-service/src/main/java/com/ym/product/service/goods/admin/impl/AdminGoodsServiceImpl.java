@@ -2,6 +2,7 @@ package com.ym.product.service.goods.admin.impl;
 
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.ym.common.constant.ResultCodeEnum;
@@ -85,6 +86,9 @@ public class AdminGoodsServiceImpl implements IAdminGoodsService {
         goodsSpuService.updateById(goodsSpu);
         GoodsSpuListResp goodsSpuListResp = GoodsConverter.INSTANCE.toGoodsResp(goodsSpu);
         goodsSpuService.populateSkuInfo(Collections.singletonList(goodsSpuListResp));
+        if (!dbGoodsSpu.getCategoryId().equals(goodsSpuListResp.getCategoryId())) {
+            goodsSkuService.update(new LambdaUpdateWrapper<GoodsSku>().eq(GoodsSku::getSpuId, goodsSpu.getId()).set(GoodsSku::getCategoryId, goodsSpu.getCategoryId()));
+        }
 
         syncEsSpu(goodsSpu.getId());
         return goodsSpuListResp;
@@ -181,9 +185,11 @@ public class AdminGoodsServiceImpl implements IAdminGoodsService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void saveSkusBySkuId(Long spuId, GoodsSkuReq goodsSkuReq) {
+        GoodsSpu goodsSpu = goodsSpuService.getById(spuId);
         GoodsSku goodsSku = GoodsSkuConverter.INSTANCE.toGoodsSku(goodsSkuReq);
         goodsSku.setSpuId(spuId);
         goodsSku.setRemainStock(goodsSku.getTotalStock());
+        goodsSku.setCategoryId(goodsSpu.getCategoryId());
         goodsSkuService.save(goodsSku);
 
         syncEsSpu(spuId);

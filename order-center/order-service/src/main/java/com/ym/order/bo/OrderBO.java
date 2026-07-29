@@ -46,13 +46,17 @@ public class OrderBO {
 
         private Long categoryId;
 
+        /**
+         * 数量
+         */
         private int quantity;
         // 构造、getter/setter
 
         private Long skuId;           // SKU ID
+
         private String skuName;       // 商品名称
+
         private Long spuId;           // SPU ID（用于多件多折分组）
-        private BigDecimal weight;    // 重量(kg)，用于运费计算
 
         private long finalPrice;
         /**

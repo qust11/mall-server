@@ -25,6 +25,7 @@ public enum OrderPromotionEnum {
     private final String desc;
 
 
+
     public List<OrderPromotionEnum> normalPromotionList() {
         return Arrays.asList(SECKILL, GROUP_BUY, MULTIPLE_DISCOUNT, DISCOUNT, COUPON);
     }

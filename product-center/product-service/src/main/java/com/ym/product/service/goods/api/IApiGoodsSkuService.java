@@ -1,5 +1,6 @@
 package com.ym.product.service.goods.api;
 
+import com.ym.common.bo.CartSkuBO;
 import com.ym.common.bo.CartSkuDetailBO;
 import com.ym.product.dto.GoodsSkuLockDto;
 
@@ -17,6 +18,6 @@ public interface IApiGoodsSkuService  {
 
     void skuLockStock(GoodsSkuLockDto goodsSkuLockDto);
 
-    List<CartSkuDetailBO> getSkuInfo(List<Long> skuIds);
+    List<CartSkuBO> getSkuInfo(List<Long> skuIds);
 
 }
