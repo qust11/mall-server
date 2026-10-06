@@ -20,6 +20,7 @@ public enum OrderPromotionEnum {
     GROUP_BUY("拼团"),
     MULTIPLE_DISCOUNT("多件多折"),
     DISCOUNT("折扣"),
+    FULL_REDUCTION("满减"),
     COUPON("优惠券"),
     ;
     private final String desc;

@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
  **/
 @Component
 @NoArgsConstructor
-public class SeckillPromotion implements Promotion {
+public class SeckillIPromotionService implements IPromotionService {
 
     @Override
     public void apply(OrderBO order, PromotionDetailDto promotionDetailDto) {

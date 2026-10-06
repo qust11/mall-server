@@ -2,9 +2,7 @@ package com.ym.order.service;
 
 
 import com.ym.common.bo.CartBO;
-import com.ym.common.bo.CartSkuDetailBO;
-
-import java.util.List;
+import com.ym.common.bo.CartDetailBO;
 
 /**
  *
@@ -15,5 +13,5 @@ public interface ICartService {
 
     void addCart(CartBO cartBO);
 
-    List<CartSkuDetailBO> getCartSkuDetail();
+    CartDetailBO getCartSkuDetail();
 }

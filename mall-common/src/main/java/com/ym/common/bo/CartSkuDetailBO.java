@@ -86,6 +86,9 @@ public class CartSkuDetailBO implements Serializable {
     private Integer lockStock;
 
 
+    /**
+     * 该行分摊到的各项优惠明细
+     */
     @ApiModelProperty("优惠信息")
-    private List<Object> discountInfo;
+    private List<CartDiscountInfoBO> discountInfo;
 }

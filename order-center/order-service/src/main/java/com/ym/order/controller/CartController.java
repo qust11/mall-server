@@ -2,13 +2,11 @@ package com.ym.order.controller;
 
 
 import com.ym.common.bo.CartBO;
-import com.ym.common.bo.CartSkuDetailBO;
+import com.ym.common.bo.CartDetailBO;
 import com.ym.common.result.Result;
 import com.ym.order.service.ICartService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 /**
  * @author qushutao
@@ -28,7 +26,7 @@ public class CartController {
     }
 
     @GetMapping("/sku-detail")
-    public Result<List<CartSkuDetailBO>> getCartSkuDetail() {
+    public Result<CartDetailBO> getCartSkuDetail() {
         return Result.success(cartService.getCartSkuDetail());
     }
 }

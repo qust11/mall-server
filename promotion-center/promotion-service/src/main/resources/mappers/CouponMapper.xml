@@ -2,20 +2,28 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ym.promotion.mapper.CouponMapper">
 
+    <!-- 用户持有的可用券:未使用、未过期;join promotion 补充活动时间/名称供下游判时效 -->
     <select id="getCouponByUser" resultType="com.ym.promotion.dto.CouponDto">
-        SELECT c.*
+        SELECT c.id,
+               c.promotion_id,
+               c.range_type,
+               c.coupon_amount,
+               c.coupon_threshold,
+               c.stock,
+               c.remain_stock,
+               c.per_limit,
+               p.promotion_name,
+               p.promotion_type,
+               p.promotion_budget,
+               p.promotion_desc,
+               p.start_time,
+               p.end_time
         FROM coupon_member cm
         INNER JOIN coupon c ON cm.coupon_id = c.id
-        INNER JOIN coupon_spu cs ON c.id = cs.coupon_id
-        <where> cm.user_id = #{userId}
-            <if test="skuIds != null and skuIds.size() > 0">
-                AND cs.spu_id IN
-                <foreach collection="skuIds" open="(" close=")" separator="," item="item">
-                    #{item}
-                </foreach>
-            </if>
-          AND cm.`status` = 2
+        INNER JOIN promotion p ON c.promotion_id = p.id
+        WHERE cm.user_id = #{userId}
+          AND cm.`status` = 1
           AND cm.expire_time > NOW()
-        </where>
+          AND c.is_deleted = 0
     </select>
 </mapper>

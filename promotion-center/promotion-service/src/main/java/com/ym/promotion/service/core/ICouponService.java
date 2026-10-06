@@ -16,5 +16,12 @@ public interface ICouponService extends IService<Coupon>, IPromotionCommonServic
 
     CouponResp getCouponByPromotionId(Long promotionId);
 
+    /**
+     * 将 coupon.spu_ids 逗号串存量数据迁移至 coupon_spu 关联表,幂等可重复执行
+     *
+     * @return 本次迁移的优惠券数量
+     */
+    int migrateSpuRangeToRelation();
+
 
 }

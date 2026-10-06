@@ -10,7 +10,7 @@ import com.ym.promotion.dto.PromotionDetailDto;
  * @author qushutao
  * @since 2026-07-19 22:09
  **/
-public interface Promotion {
+public interface IPromotionService {
 
     void apply(OrderBO order, PromotionDetailDto promotionDetailDto);
 

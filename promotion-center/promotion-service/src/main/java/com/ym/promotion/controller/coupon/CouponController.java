@@ -43,4 +43,12 @@ public class CouponController {
         couponService.deletePromoInfo(promotionId);
         return Result.success();
     }
+
+    /**
+     * 存量 coupon.spu_ids 逗号串迁移至 coupon_spu 关联表,幂等可重复执行
+     */
+    @PostMapping("/migrate-spu-range")
+    public Result<Integer> migrateSpuRange() {
+        return Result.success(couponService.migrateSpuRangeToRelation());
+    }
 }

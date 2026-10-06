@@ -47,6 +47,7 @@ public class RedisUtil {
         return list;
     }
 
+
     public Long getHashAllMemberCount(String key) {
         return redisTemplate.opsForHash().size(key);
     }
